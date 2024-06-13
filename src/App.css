@@ -1,38 +1,98 @@
-.App {
-  text-align: center;
+/*
+.app-wrapper {
+    margin: 0 auto;
+    display: grid;
+    width: 1200px;
+
+    grid-template-areas: 
+        "header header"
+        "nav content ";
+
+    grid-template-rows: 60px 1fr;
+    grid-template-columns: 2fr 10fr;
+    !* grid-gap: 10px; *!
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.app-wrapper-content {
+    grid-area: content;
+    background-color: azure;
+}
+Объяснение изменений:
+
+    Общий стиль header:
+        Flexbox: Использование Flexbox для центровки элементов по горизонтали и вертикали.
+        Padding: Дополнительное внутреннее пространство для более чистого вида.
+        Box-shadow: Добавление тени для создания эффекта подъема.
+        Border-radius: Сглаженные углы для более современного вида.
+
+    Изображение в header:
+        Border-radius: Круглые изображения для более мягкого визуального восприятия.
+
+    Блок логина (loginBlock):
+        Flexbox: Выравнивание элементов по центру.
+        Переходы: Плавный переход цвета фона при наведении.
+
+    Ссылки в loginBlock:
+        Цвет и фон: Обновление стилей ссылки для улучшения читаемости и контраста.
+        Hover эффект: Добавление эффекта при наведении для интерактивности.
+
+    Заголовок headerTitle:
+        Шрифт и цвет: Добавление заголовка с белым цветом и жирным шрифтом для выделения.
+*/
+
+/* Общие стили */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #ecf0f1; /* Светлый фон для общего вида */
+    color: #333;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* Стили для .app-wrapper */
+.app-wrapper {
+    margin: 0 auto;
+    display: grid;
+    width: 1200px;
+    grid-template-areas:
+        "header header"
+        "nav content";
+    grid-template-rows: 60px 1fr;
+    grid-template-columns: 2fr 10fr;
+    grid-gap: 20px; /* Расстояние между элементами */
+    padding: 20px; /* Внутренний отступ для всего контейнера */
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+/* Стили для .app-wrapper-content */
+.app-wrapper-content {
+    grid-area: content;
+    background-color: #ffffff; /* Белый фон для содержимого */
+    border-radius: 10px; /* Сглаженные углы */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Тень для эффекта подъема */
+    padding: 20px; /* Внутренний отступ */
 }
 
-.App-link {
-  color: #61dafb;
+button {
+    background-color: #4a76a8;
+    color: #fff;
+    border: none;
+    padding: 6px 16px; /* Уменьшенный размер */
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.875rem; /* Уменьшенный размер шрифта */
+    transition: background-color 0.3s ease;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+button:hover {
+    background-color: #3b5a7a;
+}
+
+/* Стили для ссылок */
+a {
+    color: #4a76a8;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
 }

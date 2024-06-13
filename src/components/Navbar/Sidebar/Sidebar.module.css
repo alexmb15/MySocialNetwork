@@ -1,0 +1,32 @@
+/* Стили для боковой панели */
+.sidebar {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.sidebar h3 {
+    font-size: 1.5rem;
+    color: #4a76a8;
+    margin-bottom: 10px;
+}
+
+.friendList {
+    display: flex;
+    flex-direction: column;
+}
+
+.friendList a {
+    font-size: 1rem;
+    color: #4a76a8;
+    text-decoration: none;
+    margin-top: 5px;
+    margin-left: 10px;
+    transition: color 0.3s ease;
+}
+
+.friendList a:hover {
+    color: #3b5a7a;
+}

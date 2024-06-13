@@ -1,0 +1,72 @@
+/*
+.nav {
+    grid-areagrid-area: nav;
+    background-color: darkorange;
+    padding: 20px;
+}
+
+.item a {
+    color: white;
+    text-decoration: none;
+}
+
+.item a.activeLink {
+    color: gold;
+
+    Объяснение изменений:
+
+    Общий стиль nav:
+        Цвет фона: Замена темно-оранжевого цвета на темно-синий (#2c3e50) для более современного вида.
+        Border-radius: Сглаженные углы для современного вида.
+        Box-shadow: Добавление тени для создания эффекта подъема.
+        Flexbox: Использование Flexbox для вертикального расположения элементов и создания промежутков между ними.
+
+    Элементы .item:
+        Flexbox: Выравнивание элементов по центру.
+        Padding и border-radius: Дополнительное внутреннее пространство и скругленные углы для современного вида.
+        Переходы: Плавный переход цвета фона и смещение при наведении для интерактивности.
+
+    Ссылки в .item:
+        Цвет текста: Светлый цвет текста (#ecf0f1) для лучшего контраста с темным фоном.
+        Active состояние: Золотой цвет (#f39c12) для активной ссылки и жирный шрифт для выделения текущей страницы.
+
+    Hover эффект для .item:
+        Цвет фона: Изменение цвета фона при наведении (#34495e) для интерактивности.
+        Смещение: Добавление эффекта смещения при наведении для интерактивности.
+}*/
+
+.nav {
+    grid-area: nav;
+    background-color: #2c3e50; /* Темно-синий цвет для современного вида */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.item a {
+    color: #ecf0f1; /* Светлый цвет текста */
+    text-decoration: none;
+    font-size: 1rem;
+    width: 100%;
+}
+
+.item a.activeLink {
+    color: #f39c12; /* Золотой цвет для активной ссылки */
+    font-weight: bold;
+}
+
+.item:hover {
+    background-color: #34495e; /* Цвет фона при наведении */
+    transform: translateX(5px); /* Смещение при наведении */
+}

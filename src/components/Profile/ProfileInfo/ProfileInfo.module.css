@@ -1,0 +1,184 @@
+/* Общие стили для профиля пользователя */
+.profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #ffffff;
+    border-radius: 10px;
+    /*box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);*/
+    padding: 20px;
+    margin: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.profileHeader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.profileHeader img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    transition: opacity 0.3s ease;
+}
+
+.profileHeader:hover img {
+    opacity: 0.7;
+}
+
+.profileHeader h1 {
+    font-size: 2rem;
+    color: #333;
+}
+
+.profileDetails {
+    width: 100%;
+}
+
+.profileDetails p {
+    margin: 10px 0;
+    font-size: 1rem;
+    color: #666;
+}
+
+.profileDetails h2 {
+    font-size: 1.5rem;
+    color: #4a76a8;
+    margin-bottom: 10px;
+}
+
+.profileContacts {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 20px;
+}
+
+.profileContacts h3 {
+    font-size: 1.25rem;
+    color: #4a76a8;
+    margin-bottom: 10px;
+}
+
+.profileContacts a {
+    color: #4a76a8;
+    text-decoration: none;
+    margin: 5px 0;
+    transition: color 0.3s ease;
+}
+
+.profileContacts a:hover {
+    color: #3b5a7a;
+}
+
+.lookingForAJob {
+    margin-top: 20px;
+    font-size: 1rem;
+    color: #666;
+}
+
+.lookingForAJob span {
+    color: #4a76a8;
+    font-weight: bold;
+}
+
+.aboutMe {
+    margin-top: 20px;
+    font-size: 1rem;
+    color: #666;
+}
+
+.photos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.photos img {
+    width: 100%;
+    max-width: 400px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.photos h3 {
+    font-size: 1.25rem;
+    color: #4a76a8;
+    margin-bottom: 10px;
+}
+
+.uploadIcon {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    /*color: white;*/
+    font-size: 24px; /* Adjust size as needed */
+}
+
+.profileHeader:hover .uploadIcon {
+    opacity: 1;
+}
+
+/* Стили для формы редактирования профиля */
+.profileForm {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.profileForm div {
+    margin-bottom: 10px;
+}
+
+.profileForm label {
+    font-size: 1rem;
+    color: #4a76a8;
+    margin-bottom: 5px;
+}
+
+.profileForm input,
+.profileForm textarea {
+    width: 50%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    color: #333;
+}
+
+.profileForm .checkboxContainer {
+    display: flex;
+    /*align-items: center;*/
+}
+
+.profileForm .contactField {
+    margin-top: 10px;
+    margin-left: 20px;
+}
+
+.profileForm button {
+    background-color: #4a76a8;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+    align-self: flex-start;
+}
+
+.profileForm button:hover {
+    background-color: #3b5a7a;
+}

@@ -1,0 +1,13 @@
+.avatar {
+    width: 100px;
+    height: 100px;
+}
+
+.pagination {
+    text-align:center;
+    cursor: pointer;
+}
+
+.selectedPage {
+    font-weight: bold;
+}
