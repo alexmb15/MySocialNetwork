@@ -2,6 +2,13 @@ const PLAY_SONG = "PLAY-SONG";
 const PAUSE_SONG = "PAUSE-SONG";
 const STOP_SONG = "STOP-SONG";
 
+type SongType = {
+    id: number,
+    group: string,
+    song: string,
+    songUrl: string
+}
+
 let initialState = {
     playList: [
         {
@@ -34,10 +41,12 @@ let initialState = {
             song: "Бездельник",
             songUrl: ""
         }
-    ]
+    ] as Array<SongType>
 };
 
-const musicReducer = (state = initialState, action) => {
+type InitialStateType = typeof initialState
+
+const musicReducer = (state = initialState, action: any): InitialStateType => {
     switch (action.type) {
         case PLAY_SONG:
             alert("musicReducer: PLAY");
@@ -57,9 +66,23 @@ const musicReducer = (state = initialState, action) => {
 }
 
 //ActionCreators
-export const playSongActionCreator = (songId) => ({ type: PLAY_SONG, songId });
-export const pauseSongActionCreator = (songId) => ({ type: PAUSE_SONG, songId });
-export const stopSongActionCreator = (songId) => ({ type: STOP_SONG, songId });
+type PlaySongActionCreatorType = {
+    type: typeof PLAY_SONG
+    songId: number
+}
+export const playSongActionCreator = (songId: number): PlaySongActionCreatorType => ({ type: PLAY_SONG, songId });
+
+type PauseSongActionCreatorType = {
+    type: typeof PAUSE_SONG
+    songId: number
+}
+export const pauseSongActionCreator = (songId: number): PauseSongActionCreatorType => ({ type: PAUSE_SONG, songId });
+
+type stopSongActionCreator = {
+    type: typeof STOP_SONG
+    songId: number
+}
+export const stopSongActionCreator = (songId: number):stopSongActionCreator => ({ type: STOP_SONG, songId });
 
 
 export default musicReducer;

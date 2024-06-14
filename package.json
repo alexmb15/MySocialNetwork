@@ -2,11 +2,16 @@
   "name": "react-1",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://alexmb15.github.io/MySocialNetwork/",
+  "homepage": "https://alexmb15.github.io/MySocialNetwork",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^29.5.12",
+    "@types/node": "^20.14.2",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@types/redux-form": "^8.3.11",
     "axios": "^1.6.8",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -18,6 +23,7 @@
     "redux-form": "^8.3.10",
     "redux-thunk": "^3.1.0",
     "reselect": "^5.1.0",
+    "typescript": "^5.4.5",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -25,8 +31,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "predeploy" : "npm run build",
-    "deploy" : "gh-pages -d build"
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
