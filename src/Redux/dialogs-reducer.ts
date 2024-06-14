@@ -5,7 +5,6 @@ type DialogType = {
     name: string
     imgUrl: string | null
 }
-
 type MessageType = {
     id: number
     message: string
