@@ -1,12 +1,15 @@
 import React from 'react';
 import styles from './Sidebar.module.css';
 
-const Sidebar = (props) => {
+/*type SidebarPropsType = {
+    sidebar: any
+}*/
+const Sidebar = ({sidebar}) => {
 
     let friendsElement = null;
 
-    if(props.sidebar.friends){
-        friendsElement = props.sidebar.friends.map( f => <a key={f.id}> {f.name}</a>);
+    if(sidebar.friends){
+        friendsElement = sidebar.friends.map( f => <a key={f.id}> {f.name}</a>);
     }
 
     return (

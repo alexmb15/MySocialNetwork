@@ -2,8 +2,15 @@ import React from 'react';
 import styles from "./User.module.css";
 import defaultProfilePhoto from "../../assets/images/UserProfile.png";
 import {NavLink} from "react-router-dom";
+import {UserType} from "../../types/types";
 
-let User = ({ user, ...props }) => {
+type UserPropsType = {
+    user: UserType
+    followInProgress: Array<number>
+    follow: (userId: number) => void
+    unfollow: (userId: number) => void
+}
+let User = ({user, followInProgress, follow, unfollow}: UserPropsType) => {
     return (
         <div className={styles.userCard}>
             <div className={styles.userInfo}>
@@ -22,10 +29,10 @@ let User = ({ user, ...props }) => {
             <div className={styles.buttonContainer}>
                 {
                     user.followed
-                        ? <button disabled={props.followInProgress.some(id => id === user.id)}
-                                  onClick={() => props.unfollow(user.id)}> Unfollow </button>
-                        : <button disabled={props.followInProgress.some(id => id === user.id)}
-                                  onClick={() => props.follow(user.id)}> Follow </button>
+                        ? <button disabled={followInProgress.some(id => id === user.id)}
+                                  onClick={() => unfollow(user.id)}> Unfollow </button>
+                        : <button disabled={followInProgress.some(id => id === user.id)}
+                                  onClick={() => follow(user.id)}> Follow </button>
                 }
             </div>
         </div>

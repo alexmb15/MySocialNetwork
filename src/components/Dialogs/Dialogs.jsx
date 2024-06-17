@@ -27,7 +27,7 @@ const AddDialogsMessage = (props) => {
 
 const AddDialogsMessageRedux = reduxForm({form: "addDialogMessageForm"})(AddDialogsMessage);
 
-const Dialogs = (props) => {
+const Dialogs = ({addDialogMessage, dialogsPage}) => {
 
   /*  let onAddDialogsMessage = () => {
         props.addDialogMessage();
@@ -39,16 +39,16 @@ const Dialogs = (props) => {
 
     let onSubmit = (formData) => {
         console.log(formData);
-        props.addDialogMessage(formData.newDialogMessage);
+        addDialogMessage(formData.newDialogMessage);
         //formData.target.reset();
     }
 
-    let dialogsElements = props.dialogsPage.dialogs.map(d => <DialogItem name={d.name}
+    let dialogsElements = dialogsPage.dialogs.map(d => <DialogItem name={d.name}
                                                                          key={d.id}
                                                                          id={d.id}
                                                                          imgUrl={d.imgUrl}/>);
 
-    let messagesElements = props.dialogsPage.messages.map(m => <Message key={m.id} message={m.message}/>)
+    let messagesElements = dialogsPage.messages.map(m => <Message key={m.id} message={m.message}/>)
 
     return (
         <div className={classes.dialogs}>
@@ -57,7 +57,7 @@ const Dialogs = (props) => {
             </div>
             <div className={classes.messages}>
                 {messagesElements}
-                <AddDialogsMessageRedux onSubmit={onSubmit} newDialogMessage={props.dialogsPage.newDialogMessage}/>
+                <AddDialogsMessageRedux onSubmit={onSubmit} newDialogMessage={dialogsPage.newDialogMessage}/>
             </div>
         </div>
     )

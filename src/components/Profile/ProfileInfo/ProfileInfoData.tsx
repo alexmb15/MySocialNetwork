@@ -1,11 +1,15 @@
 import styles from "./ProfileInfo.module.css"
-import {reduxForm} from "redux-form";
+import {InjectedFormProps, reduxForm} from "redux-form";
 import {createField, formGeneralError, Input, Textarea} from "../../common/FormsComponent/FormsComponent";
 import {maxLength, requiredField} from "../../../utils/validators/validators";
+import {ProfileType} from "../../../types/types";
 
 const maxLength30 = maxLength(30);
 
-export const ProfileInfoData = ({userData}) => {
+type ProfileInfoDataType = {
+    userData: ProfileType
+}
+export const ProfileInfoData = ({userData}: ProfileInfoDataType) => {
 
     return (
         <div className={styles.profileDetails}>
@@ -32,7 +36,11 @@ export const ProfileInfoData = ({userData}) => {
     )
 }
 
-const ProfileInfoDataReduxForm = ({handleSubmit, userData, error}) => {
+type MyProps = {
+    userData: ProfileType
+    error?: any
+}
+const ProfileInfoDataReduxForm = ({handleSubmit, userData, error}: MyProps & InjectedFormProps<{}, MyProps>) => {
     return (
         <form onSubmit={handleSubmit} className={styles.profileForm}>
             {createField("", "generalError", [], formGeneralError, {error: error})}
@@ -70,6 +78,6 @@ const ProfileInfoDataReduxForm = ({handleSubmit, userData, error}) => {
         </form>
     );
 }
-export const ProfileInfoDataEditForm = reduxForm({
+export const ProfileInfoDataEditForm = reduxForm<{}, MyProps>({
     form: 'edit-profile', // имя формы в состоянии Redux
 })(ProfileInfoDataReduxForm);
