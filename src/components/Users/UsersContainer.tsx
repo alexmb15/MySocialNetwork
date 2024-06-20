@@ -24,18 +24,14 @@ type MapStateToPropsType = {
     users: Array<UserType>
     followInProgress: Array<number>
 }
-type MyOwnPropsType = {
-}
 type MapDispatchToPropsType = {
     getUsers: (currentPage: number, pageSize: number) => void
     follow: (userId: number) => void
     unfollow: (userId: number) => void
 }
-type PropsType = MapStateToPropsType & MapDispatchToPropsType & MyOwnPropsType
-type StateType ={
-}
+type UsersPropsType = MapStateToPropsType & MapDispatchToPropsType
 
-class UsersContainer extends React.Component<PropsType, StateType> {
+class UsersContainer extends React.Component<UsersPropsType, {}> {
 
     componentDidMount() {
         this.props.getUsers(this.props.currentPage, this.props.pageSize);
@@ -71,6 +67,6 @@ const mapStateToProps = (state: AppStateType ): MapStateToPropsType => {
 
 export default compose(
     //withAuthRedirect,
-    connect<MapStateToPropsType, MapDispatchToPropsType, MyOwnPropsType, AppStateType>
+    connect<MapStateToPropsType, MapDispatchToPropsType, {}, AppStateType>
     (mapStateToProps,{follow, unfollow, getUsers}))
 (UsersContainer);

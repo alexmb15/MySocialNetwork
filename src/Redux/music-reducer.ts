@@ -46,7 +46,7 @@ let initialState = {
 
 type InitialStateType = typeof initialState
 
-const musicReducer = (state = initialState, action: any): InitialStateType => {
+const musicReducer = (state = initialState, action: ActionTypes): InitialStateType => {
     switch (action.type) {
         case PLAY_SONG:
             alert("musicReducer: PLAY");
@@ -61,11 +61,14 @@ const musicReducer = (state = initialState, action: any): InitialStateType => {
             return state;
 
         default:
+
             return state;
     }
 }
 
 //ActionCreators
+type ActionTypes = PlaySongActionCreatorType |  PauseSongActionCreatorType | StopSongActionCreator
+
 type PlaySongActionCreatorType = {
     type: typeof PLAY_SONG
     songId: number
@@ -78,11 +81,11 @@ type PauseSongActionCreatorType = {
 }
 export const pauseSongActionCreator = (songId: number): PauseSongActionCreatorType => ({ type: PAUSE_SONG, songId });
 
-type stopSongActionCreator = {
+type StopSongActionCreator = {
     type: typeof STOP_SONG
     songId: number
 }
-export const stopSongActionCreator = (songId: number):stopSongActionCreator => ({ type: STOP_SONG, songId });
+export const stopSongActionCreator = (songId: number):StopSongActionCreator => ({ type: STOP_SONG, songId });
 
 
 export default musicReducer;

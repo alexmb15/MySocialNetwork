@@ -9,14 +9,15 @@ import {ProfileType} from "../../../types/types";
 
 
 type ProfileInfoPropsType = {
-    userData: ProfileType
+    userData: ProfileType | null
     status: string
     isOwner: boolean
+    isEditProfileMode: boolean
+
+    setEditProfileMode: (isEdit: boolean) => void
+    updateUserStatus: (status: string) => void
     updateUserProfilePhoto: (file: any) => void
     saveProfileInfo: (formData: ProfileType) => void
-    isEditProfileMode: boolean
-    setEditProfileMode: (isEdit: boolean) => void
-    updateUserStatus: () => void
 }
 const ProfileInfo = ({
                          userData,

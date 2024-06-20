@@ -9,15 +9,35 @@ import {
     updateUserStatus
 } from "../../Redux/profile-reducer";
 import {compose} from "redux";
-import {withRouter} from "../hoc/withRouter";
+import {PropsWithRouter, withRouter} from "../hoc/withRouter";
+import {ProfileType} from "../../types/types";
+import {AppStateType} from "../../Redux/redux-store";
+import {
+    getIsEditProfileModeSelector,
+    getUserIdSelector,
+    getUserProfileSelector,
+    getUserStatusSelector
+} from "../../Redux/Selectors/user-selectors";
 
-class ProfileContainer extends React.Component {
+type MapStateToPropsType = ReturnType<typeof mapStateToProps>
+type MapDispatchToPropsType = {
+    getUserProfile: (userId: number) => void
+    getUserStatus: (userId: number) => void
+    updateUserStatus: (status: string) => void
+    updateUserProfilePhoto: (file: any) => void
+    saveProfileInfo: (formData: ProfileType) => void
+    setEditProfileMode: (isEdit: boolean) => void
+}
+type PropsType = MapStateToPropsType & MapDispatchToPropsType & PropsWithRouter
+
+class ProfileContainer extends React.Component<PropsType, {}> {
 
     refreshProfile() {
         let userId = this.props.router.params.userId ? this.props.router.params.userId : this.props.userId;
+        debugger
         if(userId) {
-            this.props.getUserProfile(userId);
-            this.props.getUserStatus(userId);
+            this.props.getUserProfile(+userId);
+            this.props.getUserStatus(+userId);
         }
     }
 
@@ -26,7 +46,7 @@ class ProfileContainer extends React.Component {
         this.refreshProfile();
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
+    componentDidUpdate(prevProps: PropsType, prevState: ProfileType) {
         if(this.props.router.params.userId !== prevProps.router.params.userId){
             this.refreshProfile();
         }
@@ -46,12 +66,12 @@ class ProfileContainer extends React.Component {
     }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: AppStateType) => {
     return {
-        userProfile: state.profilePage.userProfile,
-        status: state.profilePage.status,
-        userId: state.auth.userId,
-        isEditProfileMode: state.profilePage.isEditProfileMode
+        userProfile: getUserProfileSelector(state),
+        status: getUserStatusSelector(state),
+        userId: getUserIdSelector(state),
+        isEditProfileMode: getIsEditProfileModeSelector(state)
     }
 }
 

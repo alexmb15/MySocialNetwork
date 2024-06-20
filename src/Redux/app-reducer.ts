@@ -1,4 +1,6 @@
 import {getAuthUserData} from "./auth-reducer";
+import {ThunkAction} from "redux-thunk";
+import {AppStateType} from "./redux-store";
 
 const SET_INITIALIZED = "SET_INITIALIZED";
 
@@ -12,7 +14,7 @@ let initialState: InitialStateType = {
     globalError: null
 };
 
-const appReducer = (state = initialState, action: any): InitialStateType => {
+const appReducer = (state = initialState, action: ActionTypes): InitialStateType => {
     switch (action.type) {
         case SET_INITIALIZED:
             return {
@@ -26,14 +28,17 @@ const appReducer = (state = initialState, action: any): InitialStateType => {
 }
 
 //ActionCreators
+type ActionTypes = InitializeSucceedType
+
 type InitializeSucceedType = {
     type: typeof SET_INITIALIZED
 }
 export const initializeSucceed = (): InitializeSucceedType => ({ type: SET_INITIALIZED });
 
 //ThunkCreators
-export const initializeApp = () => {
-    return (dispatch: any) => {
+//type
+export const initializeApp = (): ThunkAction<void, AppStateType, unknown, ActionTypes> => {
+    return (dispatch, getState) => {
         let dispatchResponse = dispatch(getAuthUserData());
         Promise.all([dispatchResponse]).then( () => {
             dispatch(initializeSucceed());

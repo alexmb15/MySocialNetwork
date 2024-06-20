@@ -4,7 +4,7 @@ import {createField, formGeneralError, Input, Textarea} from "../../common/Forms
 import {maxLength, requiredField} from "../../../utils/validators/validators";
 import {ProfileType} from "../../../types/types";
 
-const maxLength30 = maxLength(30);
+const maxLength300 = maxLength(300);
 
 type ProfileInfoDataType = {
     userData: ProfileType
@@ -50,7 +50,7 @@ const ProfileInfoDataReduxForm = ({handleSubmit, userData, error}: MyProps & Inj
             </div>
             <div>
                 <label>About Me</label>
-                {createField("About me", "aboutMe", [maxLength30], Textarea)}
+                {createField("About me", "aboutMe", [maxLength300], Textarea)}
             </div>
             <div className={styles.checkboxContainer}>
                 <label>Looking for a Job</label>
@@ -61,7 +61,7 @@ const ProfileInfoDataReduxForm = ({handleSubmit, userData, error}: MyProps & Inj
                 <label>Job Description</label>
                 {createField("looking for a job description",
                     "lookingForAJobDescription",
-                    [maxLength30], Textarea)
+                    [maxLength300], Textarea)
                 }
             </div>
             <div>

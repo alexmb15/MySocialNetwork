@@ -1,13 +1,17 @@
-import React, {useEffect, useState} from "react";
+import React, {ChangeEvent, useEffect, useState} from "react";
 
-const ProfileStatus = (props) => {
+type ProfileStatusType = {
+    status: string
+    updateUserStatus: (status: string) => void
+}
+const ProfileStatus = ({status, updateUserStatus}: ProfileStatusType) => {
 
     let [editMode, setEditMode] = useState(false);
-    let [status, setStatus] = useState(props.status);
+    let [localStatus, setLocalStatus] = useState(status);
 
     useEffect(() => {
-        setStatus(props.status);
-    }, [props.status])
+        setLocalStatus(status);
+    }, [status])
 
 
     const activateEditMode = () => {
@@ -17,18 +21,18 @@ const ProfileStatus = (props) => {
 
     const deactivateEditMode = () => {
         setEditMode(false);
-        props.updateUserStatus(status);
+        updateUserStatus(localStatus);
     }
 
-    const onStatusChange = (e) => {
-        setStatus(e.currentTarget.value);
+    const onStatusChange = (e: ChangeEvent<HTMLInputElement>) => {
+        setLocalStatus(e.currentTarget.value);
     }
 
     return (
         <div>
             {!editMode &&
                 <div>
-                    <span onDoubleClick={activateEditMode}>Status: {props.status || "Du hast kein status!"}</span>
+                    <span onDoubleClick={activateEditMode}>Status: {status || "Du hast kein status!"}</span>
                 </div>
             }
             {editMode &&
@@ -36,7 +40,7 @@ const ProfileStatus = (props) => {
                     <input onChange={onStatusChange}
                            autoFocus={true}
                            onBlur={deactivateEditMode}
-                           value={status}
+                           value={localStatus}
                     />
                 </div>
             }

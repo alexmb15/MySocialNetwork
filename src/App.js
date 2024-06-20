@@ -14,6 +14,7 @@ import {connect} from "react-redux";
 import {initializeApp} from "./Redux/app-reducer";
 import Preloader from "./components/common/Preloader/Preloader";
 import {compose} from "redux";
+import NewsContainer from "./components/News/NewsContainer";
 
 class App extends Component {
 
@@ -48,7 +49,7 @@ class App extends Component {
                             </Route>
                             <Route path="/Dialogs/*" element={<DialogsContainer/>}/>
                             <Route path="/Users/*" element={<UsersContainer/>}/>
-                            <Route path='/News' element={<News/>}/>
+                            <Route path='/News' element={<NewsContainer/>}/>
                             <Route path='/Music' element={<MusicContainer/>}/>
                             <Route path='/Settings' element={<Settings/>}/>
                             <Route path='/Login' element={<Login/>}/>

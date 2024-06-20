@@ -16,7 +16,7 @@ let initialState =  {
 
 type InitialStateType = typeof initialState
 
-const sidebarReducer = (state = initialState, action: any): InitialStateType => {
+const sidebarReducer = (state = initialState, action: ActionTypes): InitialStateType => {
     switch (action.type) {
         case ADD_NEW_FRIEND:
             let newFriend = {
@@ -33,17 +33,15 @@ const sidebarReducer = (state = initialState, action: any): InitialStateType => 
 }
 
 //ActionCreators
-type NewFriend = {
-    userId: number
-    fullName: string
-}
+type ActionTypes = AddNewFriendActionCreatorType
 
 type AddNewFriendActionCreatorType = {
     type: typeof ADD_NEW_FRIEND
-    newFriend: NewFriend
+    userId: number
+    fullName: string
 }
-export const AddNewFriendActionCreator = (newFriend: NewFriend): AddNewFriendActionCreatorType => (
-    { type: ADD_NEW_FRIEND, newFriend }
+export const AddNewFriendActionCreator = (userId: number, fullName: string): AddNewFriendActionCreatorType => (
+    { type: ADD_NEW_FRIEND, userId, fullName }
 )
 
 export default sidebarReducer;

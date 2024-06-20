@@ -1,18 +1,14 @@
 import classes from './Post.module.css'
+import {PostType} from "../../../../types/types";
 
-type PostPropsType = {
-    id: number
-    message: string
-    name: string
-    likes: number
-}
-const Post = ({id, message, name, likes}: PostPropsType) => {
+
+const Post = ({id, message, name, likesCount}: PostType) => {
   return (
     <div className={classes.item}>
       <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4On3R8iOU-0ymSzk-z9bpYjcqyCRqSrSS0qiYlweQ1w&s'></img>
       <span>id: {id} message: {message}</span>
       <div>
-        <span>{name} like {likes}</span>
+        <span>{name} like {likesCount}</span>
       </div>
     </div>
   );

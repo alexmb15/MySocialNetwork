@@ -1,6 +1,6 @@
 import {createSelector} from "reselect";
 import {AppStateType} from "../redux-store";
-import {UserType} from "../../types/types";
+import {ProfileType, UserType} from "../../types/types";
 
 //get functions
 const getUsers = (state: AppStateType) => {
@@ -19,6 +19,25 @@ export const getCurrentPage = (state: AppStateType) => {
 export const getStatusFollowInProgress = (state: AppStateType) => {
     return state.usersPage.followInProgress;
 }
+export const getPosts = (state: AppStateType) => {
+    return state.profilePage.posts;
+}
+
+
+export const getUserProfileSelector = (state: AppStateType) => {
+    return state.profilePage.userProfile;
+}
+export const getUserStatusSelector = (state: AppStateType) => {
+    return state.profilePage.status;
+}
+export const getUserIdSelector = (state: AppStateType) => {
+    return state.auth.userId;
+}
+export const getIsEditProfileModeSelector = (state: AppStateType) => {
+    return state.profilePage.isEditProfileMode;
+}
+
+
 
 //selectors
 export const getUsersSelector = createSelector(getUsers,(users: Array<UserType>) => {
