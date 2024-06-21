@@ -1,5 +1,5 @@
 import axios, {AxiosResponse, CreateAxiosDefaults} from "axios";
-import {PhotosType, ProfileType} from "../types/types";
+import {PhotosType, ProfileType, UserType} from "../types/types";
 
 /*const config = {
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
@@ -14,15 +14,13 @@ axios.defaults.withCredentials = true;
 let instance = axios.create();
 
 type GetUsersType = {
-    id: number
-    name: string
-    status: string | null
-    photos: PhotosType
-    followed: boolean
+    items: Array<UserType>
+    totalCount: number
+    error: string | null
 }
 export const userAPI = {
     getUsers(currentPage = 1, pageSize = 5) {
-        return instance.get(`users?page=${currentPage}&count=${pageSize}`)
+        return instance.get<any, AxiosResponse<GetUsersType>>(`users?page=${currentPage}&count=${pageSize}`)
             .then(response => {
                 //debugger;
                 return response.data;

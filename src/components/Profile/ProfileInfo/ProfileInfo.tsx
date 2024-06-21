@@ -73,7 +73,7 @@ const ProfileInfo = ({
                         </>
                         }
                         <h1>{userData.fullName}</h1>
-                        <ProfileStatus status={status} updateUserStatus={updateUserStatus}/>
+                        <ProfileStatus status={status} updateUserStatus={updateUserStatus} isOwner={isOwner}/>
                     </div>
                     <ProfileInfoData userData={userData}/>
                 </div>}

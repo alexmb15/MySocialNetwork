@@ -34,7 +34,7 @@ class ProfileContainer extends React.Component<PropsType, {}> {
 
     refreshProfile() {
         let userId = this.props.router.params.userId ? this.props.router.params.userId : this.props.userId;
-        debugger
+        //debugger
         if(userId) {
             this.props.getUserProfile(+userId);
             this.props.getUserStatus(+userId);

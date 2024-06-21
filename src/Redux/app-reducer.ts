@@ -5,13 +5,11 @@ import {AppStateType} from "./redux-store";
 const SET_INITIALIZED = "SET_INITIALIZED";
 
 export type InitialStateType = {
-    initialized: boolean,
-    globalError: null | string
+    initialized: boolean
 }
 
 let initialState: InitialStateType = {
-    initialized: false,
-    globalError: null
+    initialized: false
 };
 
 const appReducer = (state = initialState, action: ActionTypes): InitialStateType => {

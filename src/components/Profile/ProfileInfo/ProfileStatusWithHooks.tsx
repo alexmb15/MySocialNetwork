@@ -3,8 +3,9 @@ import React, {ChangeEvent, useEffect, useState} from "react";
 type ProfileStatusType = {
     status: string
     updateUserStatus: (status: string) => void
+    isOwner: boolean
 }
-const ProfileStatus = ({status, updateUserStatus}: ProfileStatusType) => {
+const ProfileStatus = ({status, updateUserStatus, isOwner}: ProfileStatusType) => {
 
     let [editMode, setEditMode] = useState(false);
     let [localStatus, setLocalStatus] = useState(status);
@@ -16,7 +17,11 @@ const ProfileStatus = ({status, updateUserStatus}: ProfileStatusType) => {
 
     const activateEditMode = () => {
         //debugger;
-        setEditMode(true);
+        if (isOwner) {
+            setEditMode(true);
+        } else {
+            alert("Not an owner")
+        }
     }
 
     const deactivateEditMode = () => {

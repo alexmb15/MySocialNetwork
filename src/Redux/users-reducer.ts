@@ -130,6 +130,7 @@ type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionTypes>
 export const getUsers = (currentPage: number, pageSize: number): ThunkType => {
     return async (dispatch, getState) => {
         let data = await userAPI.getUsers(currentPage, pageSize);
+        //console.log(data)
         dispatch(setCurrentPage(currentPage));
         dispatch(setUsers(data.items));
         dispatch(setTotalUsersCount(data.totalCount));

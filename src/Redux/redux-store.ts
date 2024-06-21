@@ -1,5 +1,5 @@
 import {thunk as thunkMiddleware, ThunkAction} from "redux-thunk";
-import {Action, applyMiddleware, combineReducers, legacy_createStore as createStore} from "redux";
+import {Action, compose, applyMiddleware, combineReducers, legacy_createStore as createStore} from "redux";
 import profileReducer from "./profile-reducer";
 import dialogsReducer from "./dialogs-reducer";
 import sidebarReducer from "./sidebar-reducer";
@@ -25,7 +25,12 @@ type RootReducerType = typeof rootReducer;
 export type AppStateType = ReturnType<RootReducerType>;
 export type BaseThunkType<A extends Action = Action, R = Promise<void>> = ThunkAction<R, AppStateType, unknown, A>
 
-let store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
+// @ts-ignore
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+
+const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunkMiddleware)))
+
+
 //@ts-ignore
 window.store = store;
 

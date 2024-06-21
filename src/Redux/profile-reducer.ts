@@ -122,6 +122,7 @@ export const getUserStatus = (userId: number): ThunkType => {
     return async (dispatch, getState) => {
         try {
             const data = await profileAPI.getUserStatus(userId);
+            //console.log(data);
             dispatch(setUserStatus(data));
         } catch (e) {
             alert(e);
@@ -133,6 +134,7 @@ export const updateUserStatus = (status: string): ThunkType => {
     return async (dispatch, getState) => {
         try {
             const data = await profileAPI.updateUserStatus(status);
+            //console.log(data);
             if (data.resultCode === 0) {
                 dispatch(setUserStatus(status))
             } else if (data.resultCode === 1) {
@@ -148,6 +150,7 @@ export const updateUserProfilePhoto = (file: File): ThunkType => {
     return async (dispatch, getState) => {
         try {
             let data = await profileAPI.updateUserProfilePhoto(file);
+            //console.log(data);
             if (data.resultCode === 0) {
                 //debugger;
                 dispatch(setUserPhoto(data.data.photos));
@@ -165,6 +168,7 @@ export const saveProfileInfo = (profileData: ProfileType): ThunkType => {
         try {
             const userId = getState().auth.userId
             let data = await profileAPI.saveProfileInfo(profileData);
+            console.log(data);
             if (data.resultCode === 0) {
                 if(userId!=null){
                     dispatch(getUserProfile(userId));

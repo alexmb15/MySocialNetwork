@@ -4,7 +4,7 @@ import {ProfileType, UserType} from "../../types/types";
 
 //get functions
 const getUsers = (state: AppStateType) => {
-    console.log("getUsers")
+    //console.log("getUsers")
     return state.usersPage.users;
 }
 export const getTotalUsersCount = (state: AppStateType) => {
@@ -41,6 +41,6 @@ export const getIsEditProfileModeSelector = (state: AppStateType) => {
 
 //selectors
 export const getUsersSelector = createSelector(getUsers,(users: Array<UserType>) => {
-    console.log("getUsersSelector")
+    //console.log("getUsersSelector")
     return users.filter( user => true);
 })
