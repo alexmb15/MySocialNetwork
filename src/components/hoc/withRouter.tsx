@@ -1,31 +1,38 @@
-//******** for create withRouter
 import {
-    NavigateFunction, Params,
+    NavigateFunction,
+    Params,
     useLocation,
     useNavigate,
     useParams,
+    Location,
 } from "react-router-dom";
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 
-interface Router {
+// Определение типа для маршрутизации
+export interface RouterType {
     location: Location
     navigate: NavigateFunction
-    params: Readonly<Params<string>>
+    params:  Readonly<Partial<ParamsType>>
 }
 
-export interface PropsWithRouter {
-    router: Router
-    userId: number
+// Основные пропсы компонента
+type PropsType = {
+    router: RouterType
+    userId?: number
+};
+type ParamsType = {
+    userId: string
 }
 
-//******** for create withRouter
-export function withRouter<T extends PropsWithRouter>(Component: React.FC<T>): React.FC<Omit<T, "router">> {
-    function ComponentWithRouterProp(props: T) {
-        let location = useLocation();
-        let navigate = useNavigate();
-        let params = useParams();
+// Пропсы с маршрутизацией
+export type PropsWithRouter = RouterType & PropsType;
 
-
+// Функция высшего порядка (HOC) для добавления маршрутизации
+export function withRouter<T extends PropsType>(Component: React.FC<T>): React.FC<Omit<T, keyof RouterType>> {
+    function ComponentWithRouterProp(props: Omit<T, keyof RouterType>) {
+        const location = useLocation();
+        const navigate = useNavigate();
+        const params = useParams<ParamsType>();
 
         useEffect(() => {
             if (!params.userId && !props.userId) {
@@ -34,14 +41,9 @@ export function withRouter<T extends PropsWithRouter>(Component: React.FC<T>): R
         }, [params.userId, props.userId, navigate]);
 
         return (
-            <Component
-                {...props}
-                router={{location, navigate, params}}
-            />
+            <Component {...(props) as T} router={{location, navigate, params}} />
         );
     }
 
-    return ComponentWithRouterProp as React.FC<Omit<T, "router">>;
+    return ComponentWithRouterProp;
 }
-
-//******** for create withRouter

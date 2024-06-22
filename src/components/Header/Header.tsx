@@ -5,7 +5,7 @@ import {useNavigate} from 'react-router-dom';
 
 type HeaderPropsType = {
     isAuth: boolean
-    login: string
+    login: string | null
     logOut: () => void
 }
 
