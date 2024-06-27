@@ -2,13 +2,7 @@ import {profileAPI} from "../api/api"
 import {FormAction, stopSubmit} from "redux-form"
 import {PhotosType, PostType, ProfileType} from "../types/types";
 import {ThunkAction} from "redux-thunk";
-import {AppStateType, BaseThunkType} from "./redux-store";
-
-const ADD_POST = "ADD_POST"
-const SET_USER_PROFILE = "SET_USER_PROFILE"
-const SET_USER_STATUS = "SET_USER_STATUS"
-const SET_USER_PHOTO = "SET_USER_PHOTO"
-const SET_EDIT_PROFILE_MODE = "SET_EDIT_PROFILE_MODE"
+import {AppStateType, BaseThunkType, InferActionsTypes} from "./redux-store";
 
 let initialState = {
     userProfile: null as ProfileType | null,
@@ -25,7 +19,7 @@ type InitialStateType = typeof initialState;
 const profileReducer = (state = initialState, action: ActionTypes): InitialStateType => {
     //debugger;
     switch (action.type) {
-        case ADD_POST:
+        case "ADD_POST":
             let newPost = {
                 id: state.lastPostNumber + 1,
                 message: action.newPostText,
@@ -37,25 +31,25 @@ const profileReducer = (state = initialState, action: ActionTypes): InitialState
                 posts: [...state.posts, newPost],
                 lastPostNumber: newPost.id
             }
-        case SET_USER_PROFILE:
+        case "SET_USER_PROFILE":
             return {
                 ...state,
                 userProfile: action.userProfile
             }
 
-        case SET_USER_PHOTO:
+        case "SET_USER_PHOTO":
             //debugger;
             return {
                 ...state,
                 userProfile: {...state.userProfile, photos: action.photos} as ProfileType
             }
 
-        case SET_USER_STATUS:
+        case "SET_USER_STATUS":
             return {
                 ...state,
                 status: action.status
             }
-        case SET_EDIT_PROFILE_MODE:
+        case "SET_EDIT_PROFILE_MODE":
             //debugger;
             return {
                 ...state,
@@ -68,39 +62,16 @@ const profileReducer = (state = initialState, action: ActionTypes): InitialState
 }
 
 //ActionCreators
-type ActionTypes = AddPostActionCreatorType | SetUserProfileType |
-    SetUserStatusType | SetUserPhotoType | SetEditProfileModeType
+type ActionTypes = InferActionsTypes<typeof actions>
 
-type AddPostActionCreatorType ={
-    type: typeof ADD_POST
-    newPostText: string
+export const actions = {
+    addPost: (newPostText: string) => ({type: "ADD_POST", newPostText}as const),
+    setUserProfile: (userProfile: ProfileType) => ({type: "SET_USER_PROFILE", userProfile}as const),
+    setUserStatus: (status: string) => ({type: "SET_USER_STATUS", status}as const),
+    setUserPhoto: (photos: PhotosType) => ({type: "SET_USER_PHOTO", photos}as const),
+    setEditProfileMode: (editProfileMode: boolean) =>
+        ({type: "SET_EDIT_PROFILE_MODE", editProfileMode}as const)
 }
-export const addPost = (newPostText: string): AddPostActionCreatorType => ({type: ADD_POST, newPostText});
-
-type SetUserProfileType = {
-    type: typeof SET_USER_PROFILE
-    userProfile: ProfileType
-}
-export const setUserProfile = (userProfile: ProfileType): SetUserProfileType => ({type: SET_USER_PROFILE, userProfile});
-
-type SetUserStatusType = {
-    type: typeof SET_USER_STATUS
-    status: string
-}
-export const setUserStatus = (status: string): SetUserStatusType => ({type: SET_USER_STATUS, status});
-
-type SetUserPhotoType = {
-    type: typeof SET_USER_PHOTO
-    photos: PhotosType
-}
-export const setUserPhoto = (photos: PhotosType): SetUserPhotoType => ({type: SET_USER_PHOTO, photos})
-
-type SetEditProfileModeType = {
-    type: typeof SET_EDIT_PROFILE_MODE
-    editProfileMode: boolean
-}
-export const setEditProfileMode = (editProfileMode: boolean): SetEditProfileModeType =>
-    ({type: SET_EDIT_PROFILE_MODE, editProfileMode})
 
 //ThunkCreators
 //type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionTypes>
@@ -111,7 +82,7 @@ export const getUserProfile = (userId: number): ThunkType => {
         try {
             const data = await profileAPI.getProfile(userId);
             //debugger;
-            dispatch(setUserProfile(data));
+            dispatch(actions.setUserProfile(data));
             //console.log(data);
         } catch (e) {
             alert(e);
@@ -123,7 +94,7 @@ export const getUserStatus = (userId: number): ThunkType => {
         try {
             const data = await profileAPI.getUserStatus(userId);
             //console.log(data);
-            dispatch(setUserStatus(data));
+            dispatch(actions.setUserStatus(data));
         } catch (e) {
             alert(e);
         }
@@ -136,7 +107,7 @@ export const updateUserStatus = (status: string): ThunkType => {
             const data = await profileAPI.updateUserStatus(status);
             //console.log(data);
             if (data.resultCode === 0) {
-                dispatch(setUserStatus(status))
+                dispatch(actions.setUserStatus(status))
             } else if (data.resultCode === 1) {
                 alert(data);
             }
@@ -153,7 +124,7 @@ export const updateUserProfilePhoto = (file: File): ThunkType => {
             //console.log(data);
             if (data.resultCode === 0) {
                 //debugger;
-                dispatch(setUserPhoto(data.data.photos));
+                dispatch(actions.setUserPhoto(data.data.photos));
             } else if (data.resultCode === 1) {
                 alert(data);
             }
@@ -172,7 +143,7 @@ export const saveProfileInfo = (profileData: ProfileType): ThunkType => {
             if (data.resultCode === 0) {
                 if(userId!=null){
                     dispatch(getUserProfile(userId));
-                    dispatch(setEditProfileMode(false));
+                    dispatch(actions.setEditProfileMode(false));
                 }else {
                     throw new Error("userId can't be null")
                 }
@@ -187,7 +158,7 @@ export const saveProfileInfo = (profileData: ProfileType): ThunkType => {
                         [UploadError]: errorMessage
                     }
                 }));
-                dispatch(setEditProfileMode(true));
+                dispatch(actions.setEditProfileMode(true));
                 //return Promise.reject(new Error(errorMessage));
             }
         } catch (e) {

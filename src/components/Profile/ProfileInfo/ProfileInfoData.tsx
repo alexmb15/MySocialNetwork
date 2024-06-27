@@ -1,6 +1,6 @@
 import styles from "./ProfileInfo.module.css"
 import {InjectedFormProps, reduxForm} from "redux-form";
-import {createField, formGeneralError, Input, Textarea} from "../../common/FormsComponent/FormsComponent";
+import {createField, FormGeneralError, Input, Textarea} from "../../common/FormsComponent/FormsComponent";
 import {maxLength, requiredField} from "../../../utils/validators/validators";
 import {ProfileType} from "../../../types/types";
 
@@ -43,7 +43,7 @@ type MyProps = {
 const ProfileInfoDataReduxForm = ({handleSubmit, userData, error}: MyProps & InjectedFormProps<{}, MyProps>) => {
     return (
         <form onSubmit={handleSubmit} className={styles.profileForm}>
-            {createField("", "generalError", [], formGeneralError, {error: error})}
+            {createField("", "generalError", [], FormGeneralError, {error: error})}
             <div>
                 <label>Full Name</label>
                 {createField("Full name", "fullName", [requiredField], Input)}

@@ -7,7 +7,7 @@ import {
     createField,
     createImg,
     createLabel,
-    formGeneralError,
+    FormGeneralError,
     Input
 } from "../common/FormsComponent/FormsComponent";
 import {Navigate} from "react-router-dom";
@@ -39,7 +39,7 @@ let LoginForm: React.FC<InjectedFormProps<LoginFormValuesType, LoginFormOwnProps
 
             {createField<LoginFormValuesKeyType>("", "rememberMe", [], Input, {type: "checkbox"}, "remember me")}
 
-            {createField("", "generalError", [], formGeneralError, {error: error})}
+            {createField("", "generalError", [], FormGeneralError, {error: error})}
 
             {captchaURL && createImg(captchaURL)}
             {captchaURL && createField<LoginFormValuesKeyType>("", "captcha", [requiredField], Input)}

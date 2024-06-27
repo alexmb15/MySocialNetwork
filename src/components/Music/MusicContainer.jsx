@@ -1,6 +1,6 @@
 import {connect} from "react-redux";
 import Music from "./Music";
-import {pauseSongActionCreator, playSongActionCreator, stopSongActionCreator} from "../../Redux/music-reducer";
+import {actions} from "../../Redux/music-reducer";
 
 const mapStateToProps = (state) => {
     return {
@@ -10,15 +10,15 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         playSong: (songId) => {
-            let action = playSongActionCreator(songId);
+            let action = actions.playSongActionCreator(songId);
             dispatch(action);
         },
         pauseSong: (songId) => {
-            let action = pauseSongActionCreator(songId);
+            let action = actions.pauseSongActionCreator(songId);
             dispatch(action);
         },
         stopSong: (songId) => {
-            let action = stopSongActionCreator(songId);
+            let action = actions.stopSongActionCreator(songId);
             dispatch(action);
         }
     }

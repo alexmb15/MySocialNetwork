@@ -1,7 +1,4 @@
-const PLAY_SONG = "PLAY-SONG";
-const PAUSE_SONG = "PAUSE-SONG";
-const STOP_SONG = "STOP-SONG";
-
+import {InferActionsTypes} from "./redux-store";
 type SongType = {
     id: number,
     group: string,
@@ -25,20 +22,8 @@ let initialState = {
         },
         {
             id: 3,
-            group: "Король и Шут",
-            song: "Отражение",
-            songUrl: ""
-        },
-        {
-            id: 4,
             group: "Depeche Mode",
             song: "It's no good",
-            songUrl: ""
-        },
-        {
-            id: 5,
-            group: "Кино",
-            song: "Бездельник",
             songUrl: ""
         }
     ] as Array<SongType>
@@ -48,44 +33,30 @@ type InitialStateType = typeof initialState
 
 const musicReducer = (state = initialState, action: ActionTypes): InitialStateType => {
     switch (action.type) {
-        case PLAY_SONG:
+        case "PLAY-SONG":
             alert("musicReducer: PLAY");
             return state;
 
-        case PAUSE_SONG:
+        case "PAUSE-SONG":
             alert("musicReducer: PAUSE");
             return state
 
-        case STOP_SONG:
+        case "STOP-SONG":
             alert("musicReducer: STOP");
             return state;
 
         default:
-
             return state;
     }
 }
 
 //ActionCreators
-type ActionTypes = PlaySongActionCreatorType |  PauseSongActionCreatorType | StopSongActionCreator
+type ActionTypes = InferActionsTypes<typeof actions>
 
-type PlaySongActionCreatorType = {
-    type: typeof PLAY_SONG
-    songId: number
+export const actions = {
+    playSongActionCreator: (songId: number) => ({type: "PLAY-SONG", songId} as const),
+    pauseSongActionCreator: (songId: number) => ({type: "PAUSE-SONG", songId} as const),
+    stopSongActionCreator: (songId: number) => ({type: "STOP-SONG", songId} as const)
 }
-export const playSongActionCreator = (songId: number): PlaySongActionCreatorType => ({ type: PLAY_SONG, songId });
-
-type PauseSongActionCreatorType = {
-    type: typeof PAUSE_SONG
-    songId: number
-}
-export const pauseSongActionCreator = (songId: number): PauseSongActionCreatorType => ({ type: PAUSE_SONG, songId });
-
-type StopSongActionCreator = {
-    type: typeof STOP_SONG
-    songId: number
-}
-export const stopSongActionCreator = (songId: number):StopSongActionCreator => ({ type: STOP_SONG, songId });
-
 
 export default musicReducer;

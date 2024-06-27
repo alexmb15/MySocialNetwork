@@ -8,6 +8,10 @@ type FormControlPropsType = {
     children: React.ReactNode
 }
 
+type FormGeneralErrorType = {
+    error: string | null
+ }
+
 const FormControl = ({meta: {error, touched}, children}: FormControlPropsType) => {
     const hasError = error && touched;
     return <div className={styles.formComponent + " " + (hasError ? styles.error : "")}>
@@ -17,11 +21,11 @@ const FormControl = ({meta: {error, touched}, children}: FormControlPropsType) =
     </div>
 }
 
-export const formGeneralError: React.FC<WrappedFieldProps> = (props) => {
+export const FormGeneralError = ({error}: FormGeneralErrorType) => {
     return (
         <>
-            {props.meta.error && <div className={styles.formGeneralError}>
-                {props.meta.error}
+            {error && <div className={styles.formGeneralError}>
+                {error}
             </div>}
         </>
     );
@@ -30,7 +34,7 @@ export const formGeneralError: React.FC<WrappedFieldProps> = (props) => {
 export function createField<FormKeysType extends string>(placeholder = "",
                             name: FormKeysType,
                             validators: Array<FieldValidatorType>,
-                            component: React.FC<WrappedFieldProps>,
+                            component: React.FC<WrappedFieldProps> | React.FC<FormGeneralErrorType>,
                             props = {},
                             text = "") {
 

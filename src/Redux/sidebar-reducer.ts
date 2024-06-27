@@ -1,4 +1,4 @@
-const ADD_NEW_FRIEND = "ADD_NEW_FRIEND"
+import {InferActionsTypes} from "./redux-store";
 
 type FriendType = {
     id: number,
@@ -18,7 +18,7 @@ type InitialStateType = typeof initialState
 
 const sidebarReducer = (state = initialState, action: ActionTypes): InitialStateType => {
     switch (action.type) {
-        case ADD_NEW_FRIEND:
+        case "ADD_NEW_FRIEND":
             let newFriend = {
                 id: state.friends[state.friends.length-1].id + 1,
                 userId: action.userId,
@@ -33,15 +33,13 @@ const sidebarReducer = (state = initialState, action: ActionTypes): InitialState
 }
 
 //ActionCreators
-type ActionTypes = AddNewFriendActionCreatorType
+type ActionTypes = InferActionsTypes<typeof actions>
 
-type AddNewFriendActionCreatorType = {
-    type: typeof ADD_NEW_FRIEND
-    userId: number
-    fullName: string
+export const actions = {
+    AddNewFriendActionCreator: (userId: number, fullName: string) => (
+        { type: "ADD_NEW_FRIEND", userId, fullName } as const
+    )
 }
-export const AddNewFriendActionCreator = (userId: number, fullName: string): AddNewFriendActionCreatorType => (
-    { type: ADD_NEW_FRIEND, userId, fullName }
-)
+
 
 export default sidebarReducer;
