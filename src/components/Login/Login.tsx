@@ -21,28 +21,28 @@ type LoginFormOwnProps = {
 }
 
 type LoginFormValuesType = {
-    email: string;
-    password: string;
-    rememberMe: boolean;
-    captcha: string;
+    email: string
+    password: string
+    rememberMe: boolean
+    captcha: string
 }
 type LoginFormValuesKeyType = keyof LoginFormValuesType
 
-let LoginForm: React.FC<InjectedFormProps<LoginFormValuesType, LoginFormOwnProps> & LoginFormOwnProps> = (props) => {
+let LoginForm: React.FC<InjectedFormProps<LoginFormValuesType, LoginFormOwnProps> & LoginFormOwnProps> = ({handleSubmit, error, captchaURL}) => {
     return (
-        <form onSubmit={props.handleSubmit}>
-            {createLabel("Emal:")}
-            {createField("name@mail.com", "email", [requiredField, maxLength30], Input)}
+        <form onSubmit={handleSubmit}>
+            {createLabel("Email:")}
+            {createField<LoginFormValuesKeyType>("name@mail.com", "email", [requiredField, maxLength30], Input)}
 
             {createLabel("Password:")}
-            {createField("Password", "password", [requiredField, maxLength30], Input, {type: "password"})}
+            {createField<LoginFormValuesKeyType>("Password", "password", [requiredField, maxLength30], Input, {type: "password"})}
 
-            {createField("", "rememberMe", [], Input, {type: "checkbox"}, "remember me")}
+            {createField<LoginFormValuesKeyType>("", "rememberMe", [], Input, {type: "checkbox"}, "remember me")}
 
-            {createField("", "generalError", [], formGeneralError, {error: props.error})}
+            {createField("", "generalError", [], formGeneralError, {error: error})}
 
-            {props.captchaURL && createImg(props.captchaURL)}
-            {props.captchaURL && createField("", "captcha", [requiredField], Input)}
+            {captchaURL && createImg(captchaURL)}
+            {captchaURL && createField<LoginFormValuesKeyType>("", "captcha", [requiredField], Input)}
 
             {createButton("Log in")}
         </form>
