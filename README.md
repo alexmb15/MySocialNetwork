@@ -1,98 +1,98 @@
 
 # MySocialNetwork
 
-MySocialNetwork - это социальная сеть, созданная с использованием React и Redux, с типизацией на TypeScript.
+MySocialNetwork is a social network created using React and Redux, with TypeScript typing.
 
-## Функциональные возможности
+## Features
 
-- **Аутентификация**: Регистрация и вход в систему.
-- **Профиль пользователя**: Редактирование профиля, публикация постов.
-- **Диалоги**: Обмен сообщениями с другими пользователями.
-- **Список пользователей**: Просмотр и поиск других пользователей.
-- **Музыка**: Раздел для добавления и воспроизведения музыки.
-- **Sidebar**: Навигационное меню для удобного доступа к различным разделам приложения.
+- **Authentication**: Registration and login.
+- **User Profile**: Edit profile, publish posts.
+- **Dialogs**: Exchange messages with other users.
+- **User List**: View and search for other users.
+- **Music**: Section for adding and playing music.
+- **Sidebar**: Navigation menu for easy access to various sections of the app.
 
-## Установка
+## Installation
 
-### Предварительные требования
+### Prerequisites
 
-Убедитесь, что у вас установлены следующие программные компоненты:
+Make sure you have the following software installed:
 
-- Node.js (версия 14 или выше)
-- npm или yarn
+- Node.js (version 14 or higher)
+- npm or yarn
 
-### Клонирование репозитория
+### Clone the Repository
 
 ```bash
 git clone https://github.com/alexmb15/MySocialNetwork.git
 cd MySocialNetwork
 ```
 
-### Установка зависимостей
+### Install Dependencies
 
-Используйте npm или yarn для установки зависимостей:
+Use npm or yarn to install dependencies:
 
 ```bash
 npm install
-# или
+# or
 yarn install
 ```
 
-### Запуск приложения
+### Run the Application
 
-Для запуска приложения в режиме разработки используйте:
+To run the application in development mode, use:
 
 ```bash
 npm start
-# или
+# or
 yarn start
 ```
 
-Откройте [http://localhost:3000](http://localhost:3000) для просмотра в браузере.
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-## Структура проекта
+## Project Structure
 
-- **src**: Основная директория с исходным кодом
-  - **components**: Компоненты React
-  - **redux**: Файлы, связанные с Redux (редюсеры, экшены, store)
-  - **api**: API-запросы
-  - **utils**: Утилитарные функции
-  - **types**: Типы TypeScript
+- **src**: Main directory with source code
+  - **components**: React components
+  - **redux**: Files related to Redux (reducers, actions, store)
+  - **api**: API requests
+  - **utils**: Utility functions
+  - **types**: TypeScript types
 
-## Типичные ошибки и решения
+## Common Errors and Solutions
 
-### Ошибка: TS2769: No overload matches this call
+### Error: TS2769: No overload matches this call
 
-Эта ошибка возникает из-за несоответствия типов при вызове функций. Убедитесь, что все редюсеры и типы корректно определены и совпадают с ожидаемыми.
+This error occurs due to type mismatches when calling functions. Ensure that all reducers and types are correctly defined and match the expected ones.
 
-Решение:
-1. Проверьте типы редюсеров.
-2. Убедитесь, что middleware и enhancers применяются корректно.
-3. Обновите TypeScript и связанные типы.
+Solution:
+1. Check the types of reducers.
+2. Ensure that middleware and enhancers are correctly applied.
+3. Update TypeScript and related types.
 
-### Установка зависимостей с флагом `--legacy-peer-deps`
+### Installing dependencies with the `--legacy-peer-deps` flag
 
-Если возникают конфликты зависимостей при установке пакетов, используйте флаг `--legacy-peer-deps`:
+If dependency conflicts occur when installing packages, use the `--legacy-peer-deps` flag:
 
 ```bash
 npm install --legacy-peer-deps
 ```
 
-## Вклад в проект
+## Contributing
 
-Если вы хотите внести вклад в проект, пожалуйста, следуйте этим шагам:
+If you want to contribute to the project, please follow these steps:
 
-1. Форкните репозиторий.
-2. Создайте новую ветку (`git checkout -b feature/YourFeature`).
-3. Внесите изменения и сделайте коммит (`git commit -m 'Add some feature'`).
-4. Отправьте изменения в свою ветку (`git push origin feature/YourFeature`).
-5. Создайте pull request.
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature/YourFeature`).
+3. Make your changes and commit them (`git commit -m 'Add some feature'`).
+4. Push your changes to your branch (`git push origin feature/YourFeature`).
+5. Create a pull request.
 
-## Лицензия
+## License
 
-Этот проект лицензирован под лицензией MIT. Подробнее см. в файле [LICENSE](LICENSE).
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
 
-## Контакты
+## Contact
 
-Если у вас есть вопросы или предложения, пожалуйста, свяжитесь с автором проекта через GitHub Issues.
+If you have any questions or suggestions, please contact the project author via GitHub Issues.
 
