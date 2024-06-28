@@ -1,7 +1,9 @@
-import {authAPI, ResultCodeForCaptcha, ResultCodes, securityAPI} from "../api/api"
+import {ResultCodeForCaptchaEnum, ResultCodesEnum} from "../api/api"
 import {FormAction, stopSubmit} from "redux-form"
 import {ThunkAction} from "redux-thunk";
 import {AppStateType, InferActionsTypes} from "./redux-store";
+import {authAPI} from "../api/authAPI";
+import {securityAPI} from "../api/securityAPI";
 
 let initialState = {
     userId: null as (number | null),
@@ -49,7 +51,7 @@ export const getAuthUserData = (): ThunkType => {
         try {
             const data = await authAPI.isAuth();
             //debugger;
-            if (data.resultCode === ResultCodes.Success) {
+            if (data.resultCode === ResultCodesEnum.Success) {
                 let {id, login, email} = data.data;
                 dispatch(actions.setAuthUserData(id, login, email, true));
             } else {
@@ -65,15 +67,15 @@ export const getAuthUserData = (): ThunkType => {
 export const logIn = (email: string, password: string, rememberMe: boolean, captcha: string): ThunkType => {
     return async (dispatch, getState) => {
         try {
-            const response = await authAPI.logIn(email, password, rememberMe, captcha);
-            if (response.data.resultCode === ResultCodes.Success) {
+            const data = await authAPI.logIn(email, password, rememberMe, captcha);
+            if (data.resultCode === ResultCodesEnum.Success) {
                 dispatch(getAuthUserData());
             } else {
-                if (response.data.resultCode === ResultCodeForCaptcha.CaptchaIsRequired) {
+                if (data.resultCode === ResultCodeForCaptchaEnum.CaptchaIsRequired) {
                     dispatch(getCaptcha());
                 }
-                let errorMessage = response.data.messages.length > 0
-                    ? response.data.messages[0]
+                let errorMessage = data.messages.length > 0
+                    ? data.messages[0]
                     : "Email or password is wrong!";
                 dispatch(stopSubmit("login", {_error: errorMessage}));
             }
@@ -85,10 +87,10 @@ export const logIn = (email: string, password: string, rememberMe: boolean, capt
 
 export const logOut = (): ThunkType => {
     return async (dispatch, getState) => {
-        //debugger;
         try {
             const data = await authAPI.logOut();
             //console.log(data)
+            debugger;
             if (data.resultCode === 0) {
                 dispatch(actions.setAuthUserData(null, null, null, false));
             }
