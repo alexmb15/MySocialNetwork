@@ -73,8 +73,6 @@ const usersReducer = (state = initialState, action: ActionTypes): InitialStateTy
 }
 
 //Action Creators
-type ActionTypes = InferActionsTypes<typeof actions>
-
 export const actions = {
     followUser: (userId: number) => ({type: 'FOLLOW', userId} as const),
     unfollowUser: (userId: number) => ({type: 'UNFOLLOW', userId} as const),
@@ -90,10 +88,8 @@ export const actions = {
 }
 
 //ThunkCreators
-type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionTypes>
-
 export const getUsers = (currentPage: number, pageSize: number): ThunkType => {
-    return async (dispatch, getState) => {
+    return async (dispatch) => {
         let data = await userAPI.getUsers(currentPage, pageSize);
         //console.log(data)
         dispatch(actions.setCurrentPage(currentPage));
@@ -117,7 +113,7 @@ const followUnfollow = async (dispatch: Dispatch<ActionTypes>, userId: number, m
 }
 
 export const follow = (userId: number): ThunkType => {
-    return async (dispatch, getState) => {
+    return async (dispatch) => {
         /*let methodAPI = followAPI.follow.bind(followAPI);
         let actionCreator = followUser;*/
         followUnfollow(dispatch, userId, followAPI.follow.bind(followAPI), actions.followUser);
@@ -125,7 +121,7 @@ export const follow = (userId: number): ThunkType => {
 }
 
 export const unfollow = (userId: number): ThunkType => {
-    return async (dispatch, getState) => {
+    return async (dispatch) => {
         /*let methodAPI = followAPI.unfollow.bind(followAPI);
         let actionCreator = unfollowUser;*/
         followUnfollow(dispatch, userId, followAPI.unfollow.bind(followAPI), actions.unfollowUser);
@@ -133,3 +129,6 @@ export const unfollow = (userId: number): ThunkType => {
 }
 
 export default usersReducer;
+
+type ActionTypes = InferActionsTypes<typeof actions>
+type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionTypes>

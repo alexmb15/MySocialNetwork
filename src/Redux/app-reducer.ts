@@ -6,8 +6,6 @@ let initialState = {
     initialized: false
 }
 
-type InitialStateType = typeof initialState
-
 const appReducer = (state = initialState, action: ActionTypes): InitialStateType => {
     switch (action.type) {
         case "SET_INITIALIZED":
@@ -22,8 +20,6 @@ const appReducer = (state = initialState, action: ActionTypes): InitialStateType
 }
 
 //ActionCreators
-type ActionTypes = InferActionsTypes<typeof actions>
-
 export const actions = {
     initializeSucceed: () => ({ type: "SET_INITIALIZED" } as const)
 }
@@ -31,7 +27,7 @@ export const actions = {
 //ThunkCreators
 //type
 export const initializeApp = (): ThunkAction<void, AppStateType, unknown, ActionTypes> => {
-    return (dispatch, getState) => {
+    return (dispatch) => {
         let dispatchResponse = dispatch(getAuthUserData());
         Promise.all([dispatchResponse]).then( () => {
             dispatch(actions.initializeSucceed());
@@ -40,3 +36,6 @@ export const initializeApp = (): ThunkAction<void, AppStateType, unknown, Action
 }
 
 export default appReducer;
+
+type InitialStateType = typeof initialState
+type ActionTypes = InferActionsTypes<typeof actions>

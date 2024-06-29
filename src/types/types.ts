@@ -36,3 +36,12 @@ export type UserType = {
     status: string | null
     /*uniqueUrlName: string | null*/
 }
+export type DialogType = {
+    id: number
+    name: string
+    imgUrl: string | null
+}
+export type MessageType = {
+    id: number
+    message: string
+}

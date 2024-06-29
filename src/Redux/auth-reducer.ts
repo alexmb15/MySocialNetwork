@@ -1,9 +1,10 @@
 import {ResultCodeForCaptchaEnum, ResultCodesEnum} from "../api/api"
 import {FormAction, stopSubmit} from "redux-form"
 import {ThunkAction} from "redux-thunk";
-import {AppStateType, InferActionsTypes} from "./redux-store";
+import {AppStateType, BaseThunkType, InferActionsTypes} from "./redux-store";
 import {authAPI} from "../api/authAPI";
 import {securityAPI} from "../api/securityAPI";
+import {Action} from "redux";
 
 let initialState = {
     userId: null as (number | null),
@@ -12,8 +13,6 @@ let initialState = {
     isAuth: false,
     captchaURL: null as string | null
 };
-
-type InitialStateType = typeof initialState
 
 const authReducer = (state = initialState, action: ActionTypes): InitialStateType => {
     switch (action.type) {
@@ -32,7 +31,6 @@ const authReducer = (state = initialState, action: ActionTypes): InitialStateTyp
 
 
 //ActionCreators
-type ActionTypes = InferActionsTypes<typeof actions> | FormAction
 
 export const actions = {
     setAuthUserData: (userId: number | null, login: string | null, email: string | null, isAuth: boolean) =>
@@ -44,10 +42,8 @@ export const actions = {
 }
 
 //ThunkCreators
-type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionTypes>
-
 export const getAuthUserData = (): ThunkType => {
-    return async (dispatch, getState) => {
+    return async (dispatch) => {
         try {
             const data = await authAPI.isAuth();
             //debugger;
@@ -65,7 +61,7 @@ export const getAuthUserData = (): ThunkType => {
 
 
 export const logIn = (email: string, password: string, rememberMe: boolean, captcha: string): ThunkType => {
-    return async (dispatch, getState) => {
+    return async (dispatch) => {
         try {
             const data = await authAPI.logIn(email, password, rememberMe, captcha);
             if (data.resultCode === ResultCodesEnum.Success) {
@@ -86,7 +82,7 @@ export const logIn = (email: string, password: string, rememberMe: boolean, capt
 }
 
 export const logOut = (): ThunkType => {
-    return async (dispatch, getState) => {
+    return async (dispatch) => {
         try {
             const data = await authAPI.logOut();
             //console.log(data)
@@ -101,7 +97,7 @@ export const logOut = (): ThunkType => {
 }
 
 export const getCaptcha = (): ThunkType => {
-    return async (dispatch, getState) => {
+    return async (dispatch) => {
         try {
             const data = await securityAPI.getCaptcha();
             //console.log(data)
@@ -115,3 +111,7 @@ export const getCaptcha = (): ThunkType => {
 
 
 export default authReducer;
+
+type InitialStateType = typeof initialState
+type ActionTypes = InferActionsTypes<typeof actions>
+type ThunkType = BaseThunkType<ActionTypes | FormAction>

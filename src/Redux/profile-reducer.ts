@@ -14,8 +14,6 @@ let initialState = {
     status: ""
 }
 
-type InitialStateType = typeof initialState;
-
 const profileReducer = (state = initialState, action: ActionTypes): InitialStateType => {
     //debugger;
     switch (action.type) {
@@ -62,8 +60,6 @@ const profileReducer = (state = initialState, action: ActionTypes): InitialState
 }
 
 //ActionCreators
-type ActionTypes = InferActionsTypes<typeof actions>
-
 export const actions = {
     addPost: (newPostText: string) => ({type: "ADD_POST", newPostText}as const),
     setUserProfile: (userProfile: ProfileType) => ({type: "SET_USER_PROFILE", userProfile}as const),
@@ -75,10 +71,8 @@ export const actions = {
 
 //ThunkCreators
 //type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionTypes>
-type ThunkType = BaseThunkType<ActionTypes | FormAction>
-
 export const getUserProfile = (userId: number): ThunkType => {
-    return async (dispatch, getState) => {
+    return async (dispatch) => {
         try {
             const data = await profileAPI.getProfile(userId);
             //debugger;
@@ -90,7 +84,7 @@ export const getUserProfile = (userId: number): ThunkType => {
     }
 }
 export const getUserStatus = (userId: number): ThunkType => {
-    return async (dispatch, getState) => {
+    return async (dispatch) => {
         try {
             const data = await profileAPI.getUserStatus(userId);
             //console.log(data);
@@ -102,7 +96,7 @@ export const getUserStatus = (userId: number): ThunkType => {
 }
 
 export const updateUserStatus = (status: string): ThunkType => {
-    return async (dispatch, getState) => {
+    return async (dispatch) => {
         try {
             const data = await profileAPI.updateUserStatus(status);
             //console.log(data);
@@ -118,7 +112,7 @@ export const updateUserStatus = (status: string): ThunkType => {
 }
 
 export const updateUserProfilePhoto = (file: File): ThunkType => {
-    return async (dispatch, getState) => {
+    return async (dispatch) => {
         try {
             let data = await profileAPI.updateUserProfilePhoto(file);
             //console.log(data);
@@ -126,7 +120,7 @@ export const updateUserProfilePhoto = (file: File): ThunkType => {
                 //debugger;
                 dispatch(actions.setUserPhoto(data.data.photos));
             } else if (data.resultCode === 1) {
-                alert(data);
+                alert(data.messages[0]);
             }
         } catch (e) {
             alert(e);
@@ -168,3 +162,7 @@ export const saveProfileInfo = (profileData: ProfileType): ThunkType => {
 }
 
 export default profileReducer;
+
+type ActionTypes = InferActionsTypes<typeof actions>
+type ThunkType = BaseThunkType<ActionTypes | FormAction>
+type InitialStateType = typeof initialState;

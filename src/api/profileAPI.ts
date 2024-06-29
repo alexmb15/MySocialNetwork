@@ -1,5 +1,5 @@
 import {PhotosType, ProfileType} from "../types/types";
-import {instance, APIResponseType, ResultCodesEnum} from "./api";
+import {instance, APIResponseType} from "./api";
 
 type UpdateUserProfilePhotoDataType = {
         photos: PhotosType

@@ -1,3 +1,4 @@
+import React from 'react';
 import classes from './Post.module.css'
 import {PostType} from "../../../../types/types";
 

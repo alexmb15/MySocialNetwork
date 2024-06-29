@@ -1,11 +1,5 @@
 import {InferActionsTypes} from "./redux-store";
 
-type FriendType = {
-    id: number,
-    userId: number,
-    name: string
-}
-
 let initialState =  {
     friends: [
         {id: 1, userId: 2, name: "samurai dimych"},
@@ -13,8 +7,6 @@ let initialState =  {
         {id: 3, userId: 11, name: "Sol"}
     ] as Array<FriendType>
 };
-
-type InitialStateType = typeof initialState
 
 const sidebarReducer = (state = initialState, action: ActionTypes): InitialStateType => {
     switch (action.type) {
@@ -33,8 +25,6 @@ const sidebarReducer = (state = initialState, action: ActionTypes): InitialState
 }
 
 //ActionCreators
-type ActionTypes = InferActionsTypes<typeof actions>
-
 export const actions = {
     AddNewFriendActionCreator: (userId: number, fullName: string) => (
         { type: "ADD_NEW_FRIEND", userId, fullName } as const
@@ -43,3 +33,11 @@ export const actions = {
 
 
 export default sidebarReducer;
+
+type FriendType = {
+    id: number,
+    userId: number,
+    name: string
+}
+type InitialStateType = typeof initialState
+type ActionTypes = InferActionsTypes<typeof actions>

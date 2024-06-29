@@ -1,61 +1,64 @@
 {
-  "name": "react-1",
-  "version": "0.1.0",
-  "private": true,
-  "homepage": "https://alexmb15.github.io/MySocialNetwork",
-  "dependencies": {
-    "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "@types/jest": "^29.5.12",
-    "@types/node": "^20.14.2",
-    "@types/react": "^18.3.3",
-    "@types/react-dom": "^18.3.0",
-    "@types/redux-form": "^8.3.11",
-    "axios": "^1.6.8",
-    "clsx": "^2.1.1",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-icons": "^5.2.1",
-    "react-redux": "^7.2.0",
-    "react-router-dom": "^6.23.0",
-    "react-scripts": "5.0.1",
-    "redux": "^5.0.1",
-    "redux-form": "^8.3.10",
-    "redux-thunk": "^3.1.0",
-    "reselect": "^5.1.0",
-    "typescript": "^5.5.2",
-    "web-vitals": "^2.1.4"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "devDependencies": {
-    "@types/react-redux": "^7.1.33",
-    "@types/redux-thunk": "^2.1.0",
-    "gh-pages": "^6.1.1"
-  }
+    "name": "react-1",
+    "version": "0.1.0",
+    "private": true,
+    "homepage": "https://alexmb15.github.io/MySocialNetwork",
+    "dependencies": {
+        "@reduxjs/toolkit": "^2.2.6",
+        "@testing-library/jest-dom": "^5.17.0",
+        "@testing-library/react": "^13.4.0",
+        "@testing-library/user-event": "^13.5.0",
+        "@types/jest": "^29.5.12",
+        "@types/node": "^20.14.2",
+        "@types/react": "^18.3.3",
+        "@types/react-dom": "^18.3.0",
+        "@types/redux-form": "^8.3.11",
+        "axios": "^1.6.8",
+        "clsx": "^2.1.1",
+        "react": "^18.3.1",
+        "react-dom": "^18.3.1",
+        "react-icons": "^5.2.1",
+        "react-redux": "^7.2.0",
+        "react-router-dom": "^6.23.0",
+        "react-scripts": "5.0.1",
+        "redux": "^5.0.1",
+        "redux-form": "^8.3.10",
+        "redux-thunk": "^3.1.0",
+        "reselect": "^5.1.0",
+        "typescript": "^5.5.2",
+        "web-vitals": "^2.1.4"
+    },
+    "scripts": {
+        "start": "react-scripts start",
+        "build": "react-scripts build",
+        "test": "react-scripts test",
+        "eject": "react-scripts eject",
+        "predeploy": "npm run build",
+        "deploy": "gh-pages -d build",
+        "auto-compile": "tsc -w -p tsconfig.json",
+        "compile": "tsc -p tsconfig.json"
+    },
+    "eslintConfig": {
+        "extends": [
+            "react-app",
+            "react-app/jest"
+        ]
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    },
+    "devDependencies": {
+        "@types/react-redux": "^7.1.33",
+        "@types/redux-thunk": "^2.1.0",
+        "gh-pages": "^6.1.1"
+    }
 }

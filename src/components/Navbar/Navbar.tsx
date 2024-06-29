@@ -1,3 +1,4 @@
+import React from 'react';
 import classes from './Navbar.module.css';
 import {NavLink} from "react-router-dom";
 import SidebarContainer from "./Sidebar/SidebarContainer";

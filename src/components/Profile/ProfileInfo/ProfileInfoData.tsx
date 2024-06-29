@@ -1,3 +1,4 @@
+import React from 'react';
 import styles from "./ProfileInfo.module.css"
 import {InjectedFormProps, reduxForm} from "redux-form";
 import {createField, FormGeneralError, Input, Textarea} from "../../common/FormsComponent/FormsComponent";

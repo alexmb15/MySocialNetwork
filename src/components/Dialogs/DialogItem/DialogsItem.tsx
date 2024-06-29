@@ -1,3 +1,4 @@
+import React from 'react';
 import {NavLink} from "react-router-dom";
 import classes from "./../Dialogs.module.css";
 import defaultProfilePhoto from "../../../assets/images/UserProfile.png";
@@ -5,7 +6,7 @@ import defaultProfilePhoto from "../../../assets/images/UserProfile.png";
 type DialogItemPropsType = {
     id: number
     name: string
-    imgUrl: string
+    imgUrl: string | null
     key: number
 }
 const DialogItem = ({id, name, imgUrl}: DialogItemPropsType) => {

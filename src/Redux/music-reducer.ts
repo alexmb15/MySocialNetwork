@@ -1,10 +1,4 @@
 import {InferActionsTypes} from "./redux-store";
-type SongType = {
-    id: number,
-    group: string,
-    song: string,
-    songUrl: string
-}
 
 let initialState = {
     playList: [
@@ -29,8 +23,6 @@ let initialState = {
     ] as Array<SongType>
 };
 
-type InitialStateType = typeof initialState
-
 const musicReducer = (state = initialState, action: ActionTypes): InitialStateType => {
     switch (action.type) {
         case "PLAY-SONG":
@@ -51,8 +43,6 @@ const musicReducer = (state = initialState, action: ActionTypes): InitialStateTy
 }
 
 //ActionCreators
-type ActionTypes = InferActionsTypes<typeof actions>
-
 export const actions = {
     playSongActionCreator: (songId: number) => ({type: "PLAY-SONG", songId} as const),
     pauseSongActionCreator: (songId: number) => ({type: "PAUSE-SONG", songId} as const),
@@ -60,3 +50,12 @@ export const actions = {
 }
 
 export default musicReducer;
+
+type SongType = {
+    id: number,
+    group: string,
+    song: string,
+    songUrl: string
+}
+type InitialStateType = typeof initialState
+type ActionTypes = InferActionsTypes<typeof actions>
