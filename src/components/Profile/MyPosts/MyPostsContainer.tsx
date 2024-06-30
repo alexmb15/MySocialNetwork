@@ -17,15 +17,6 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     }
 }
 
-/*const mapDispatchToProps = (dispatch) => {
-    return {
-        addPost: (newPostText) => {
-            let action = addPost(newPostText);
-            dispatch(action)
-        }
-    }
-}*/
-
 let MyPostsContainer = connect<MapStateToPropsType, MapDispatchToPropsType, {}, AppStateType>
                        (mapStateToProps, {addPost: actions.addPost})(MyPosts);
 

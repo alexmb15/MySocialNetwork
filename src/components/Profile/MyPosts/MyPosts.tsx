@@ -1,38 +1,20 @@
 import React from 'react';
 import classes from './MyPosts.module.css'
 import Post from './Post/Post';
-import {Field, InjectedFormProps, reduxForm} from "redux-form";
-import {Textarea} from "../../common/FormsComponent/FormsComponent";
-import {maxLength} from "../../../utils/validators/validators";
 import {PostType} from "../../../types/types";
-
-const maxLength20 = maxLength(20);
-
-const AddNewPostForm = ({handleSubmit}: InjectedFormProps<{}, {}>) => {
-    return (
-        <form onSubmit={handleSubmit}>
-            <div>
-                <Field component={Textarea}
-                       validate={[maxLength20]}
-                       placeholder="New message"
-                       name="newPostText"/>
-            </div>
-            <div>
-                <button>Add post</button>
-            </div>
-        </form>
-    )
-}
-
-const AddNewPostFormRedux = reduxForm({form: "addNewPostForm"})(AddNewPostForm);
+import {AddNewPostFormRedux} from "./AddNewPostForm/AddNewPostForm";
 
 type MyPostsType = {
     posts: Array<PostType>
     addPost: (newPostText: string) => void
 }
+export type NewPostTextType = {
+    newPostText: string
+}
+
 const MyPosts = ({posts, addPost}: MyPostsType) => {
 
-    let onSubmit = (formData: any) => {
+    let onSubmit = (formData: NewPostTextType) => {
         console.log(formData.newPostText);
         addPost(formData.newPostText);
     }

@@ -1,7 +1,7 @@
+import React, {Component} from "react";
 import './App.css';
 import Navbar from './components/Navbar/Navbar';
 import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
-import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
@@ -9,16 +9,21 @@ import MusicContainer from "./components/Music/MusicContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
-import {Component} from "react";
 import {connect} from "react-redux";
 import {initializeApp} from "./Redux/app-reducer";
 import Preloader from "./components/common/Preloader/Preloader";
 import {compose} from "redux";
 import NewsContainer from "./components/News/NewsContainer";
+import {AppStateType} from "./Redux/redux-store";
 
-class App extends Component {
+type StatePropsType = ReturnType<typeof mapStateToProps>
+type DispatchPropsType = {
+    initializeApp: () => void
+}
 
-    catchAllUnhandledErrors = (reason, promiseRejectionEvent) => {
+class App extends Component<StatePropsType & DispatchPropsType, {}> {
+
+    catchAllUnhandledErrors = (promiseRejectionEvent: PromiseRejectionEvent) => {
         alert(promiseRejectionEvent);
     }
 
@@ -61,7 +66,7 @@ class App extends Component {
     }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: AppStateType) => ({
     initialized: state.app.initialized
 })
 
