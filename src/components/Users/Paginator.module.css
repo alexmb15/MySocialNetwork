@@ -1,0 +1,10 @@
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.paginationItem.Mui-selected {
+    background-color: rgba(25, 118, 210, 0.08);
+    color: #1976d2;
+}

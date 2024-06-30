@@ -1,45 +1,47 @@
 import React from 'react';
-import styles from "./Users.module.css"
-import clsx from 'clsx';
-
+import Pagination from '@mui/material/Pagination';
+import PaginationItem from '@mui/material/PaginationItem';
+import styles from './Paginator.module.css';
 
 type PaginatorPropsType = {
-    totalItemsCount: number
-    pageSize: number
-    currentPage: number
-    onPageChanged: (pageNumber: number) => void
-    portionSize: number
-}
-let Paginator = ({totalItemsCount, pageSize, currentPage, onPageChanged, portionSize = 10}: PaginatorPropsType) => {
-    /*let [portionNumber, setPortionNumber] = useState(1);*/
+    totalItemsCount: number;
+    pageSize: number;
+    currentPage: number;
+    onPageChanged: (pageNumber: number) => void;
+    portionSize?: number;
+};
 
-    let pageCount = Math.ceil(totalItemsCount / pageSize);
-    let createPages = (numElements: number): Array<number> => [...Array(numElements)].map((_, index) => index + 1);
-    let pages = createPages(pageCount);
+const Paginator: React.FC<PaginatorPropsType> = ({
+                                                     totalItemsCount,
+                                                     pageSize,
+                                                     currentPage,
+                                                     onPageChanged,
+                                                     portionSize = 10,
+                                                 }) => {
+    const pageCount = Math.ceil(totalItemsCount / pageSize);
 
-    /*let portionCount = Math.ceil( pageCount / portionSize );*/
-    /*useEffect(()=>setPortionNumber(Math.ceil(currentPage/portionSize)), [currentPage]);*/
+    const handlePageChange = (event: React.ChangeEvent<unknown>, page: number) => {
+        onPageChanged(page);
+    };
 
-
-    let slicedPages;
-    let curPage = currentPage;
-    if (curPage - portionSize/2 < 0) {
-        slicedPages = pages.slice(0, portionSize);
-    } else {
-        slicedPages = pages.slice(curPage - portionSize/2, curPage + (portionSize/2-1));
-    }
-
-    return <div className={styles.pagination}>
-        {
-            slicedPages.map(p => {
-                return <span key={p} onClick={() => {
-                    onPageChanged(p)
-                }}
-                             className={clsx(currentPage === p && styles.selectedPage)}> {p}
-                    </span>
-            })
-        }
-    </div>
-}
+    return (
+        <div className={styles.pagination}>
+            <Pagination
+                count={pageCount}
+                page={currentPage}
+                onChange={handlePageChange}
+                variant="outlined"
+                shape="rounded"
+                size="large"
+                renderItem={(item) => (
+                    <PaginationItem
+                        {...item}
+                        className={styles.paginationItem}
+                    />
+                )}
+            />
+        </div>
+    );
+};
 
 export default Paginator;
