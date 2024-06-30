@@ -1,7 +1,6 @@
 import {FormAction, stopSubmit} from "redux-form"
 import {PhotosType, PostType, ProfileType} from "../types/types";
-import {ThunkAction} from "redux-thunk";
-import {AppStateType, BaseThunkType, InferActionsTypes} from "./redux-store";
+import {BaseThunkType, InferActionsTypes} from "./redux-store";
 import {profileAPI} from "../api/profileAPI";
 
 let initialState = {

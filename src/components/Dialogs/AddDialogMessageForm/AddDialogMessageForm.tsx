@@ -3,12 +3,14 @@ import {maxLength} from "../../../utils/validators/validators";
 import {InjectedFormProps, reduxForm} from "redux-form";
 import classes from "../Dialogs.module.css";
 import {createField, Textarea} from "../../common/FormsComponent/FormsComponent";
-import {NewDialogMessageFormValueType} from "../Dialogs";
-
 
 const maxLength50 = maxLength(50);
-type NewDialogMessageFormValueKeysType = Extract<keyof NewDialogMessageFormValueType, string>
+
+export type NewDialogMessageFormValueType = {
+    newDialogMessage: string
+}
 type PropsType = {}
+type NewDialogMessageFormValueKeysType = Extract<keyof NewDialogMessageFormValueType, string>
 
 const AddDialogsMessage: React.FC<InjectedFormProps<NewDialogMessageFormValueType, PropsType> & PropsType> = (props) => {
     return (
@@ -27,4 +29,4 @@ const AddDialogsMessage: React.FC<InjectedFormProps<NewDialogMessageFormValueTyp
         </form>
     )
 }
-export default reduxForm<NewDialogMessageFormValueType>({form: "addDialogMessageForm"})(AddDialogsMessage);
+export default reduxForm<NewDialogMessageFormValueType, PropsType>({form: "addDialogMessageForm"})(AddDialogsMessage);

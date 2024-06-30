@@ -2,7 +2,7 @@ import React from 'react';
 import classes from "./Dialogs.module.css"
 import DialogItem from "./DialogItem/DialogsItem";
 import Message from "./Message/Message";
-import AddDialogsMessageForm from "./AddDialogMessageForm/AddDialogMessageForm";
+import AddDialogsMessageForm, {NewDialogMessageFormValueType} from "./AddDialogMessageForm/AddDialogMessageForm";
 import {InitialDialogStateType} from "../../Redux/dialogs-reducer";
 
 type PropsType = {
@@ -10,9 +10,6 @@ type PropsType = {
     addDialogMessage: (newDialogMessage: string) => void
 }
 
-export type NewDialogMessageFormValueType = {
-    newDialogMessage: string
-}
 const Dialogs: React.FC<PropsType> = ({addDialogMessage, dialogsPage}) => {
 
     let onSubmit = (formData: NewDialogMessageFormValueType) => {

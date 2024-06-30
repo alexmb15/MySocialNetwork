@@ -8,6 +8,7 @@ import {
     createImg,
     createLabel,
     FormGeneralError,
+    FormGeneralErrorValuesType,
     Input
 } from "../common/FormsComponent/FormsComponent";
 import {Navigate} from "react-router-dom";
@@ -27,6 +28,7 @@ type LoginFormValuesType = {
     captcha: string
 }
 type LoginFormValuesKeyType = keyof LoginFormValuesType
+type FormGeneralErrorValuesKeysType = Extract<keyof FormGeneralErrorValuesType, string>
 
 let LoginForm: React.FC<InjectedFormProps<LoginFormValuesType, LoginFormOwnProps> & LoginFormOwnProps> = ({handleSubmit, error, captchaURL}) => {
     return (
@@ -39,7 +41,7 @@ let LoginForm: React.FC<InjectedFormProps<LoginFormValuesType, LoginFormOwnProps
 
             {createField<LoginFormValuesKeyType>("", "rememberMe", [], Input, {type: "checkbox"}, "remember me")}
 
-            {createField("", "generalError", [], FormGeneralError, {error: error})}
+            {createField<FormGeneralErrorValuesKeysType>("", "generalError", [], FormGeneralError, {error: error})}
 
             {captchaURL && createImg(captchaURL)}
             {captchaURL && createField<LoginFormValuesKeyType>("", "captcha", [requiredField], Input)}

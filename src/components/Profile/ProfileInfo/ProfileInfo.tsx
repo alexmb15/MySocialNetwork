@@ -4,23 +4,13 @@ import defaultProfilePhoto from "../../../assets/images/UserProfile.png";
 import Preloader from "../../common/Preloader/Preloader";
 import ProfileStatus from "./ProfileStatusWithHooks";
 import {FaCamera} from 'react-icons/fa';
-import {ProfileInfoData, ProfileInfoDataEditForm} from "./ProfileInfoData";
+import {ProfileInfoData} from "./ProfileInfoData";
 import {ProfileType} from "../../../types/types";
+import {ProfilePropsType} from "../Profile";
+import {ProfileInfoDataEditForm} from "./ProfileInfoDataReduxForm/ProfileInfoDataReduxForm";
 
-
-type ProfileInfoPropsType = {
-    userData: ProfileType | null
-    status: string
-    isOwner: boolean
-    isEditProfileMode: boolean
-
-    setEditProfileMode: (isEdit: boolean) => void
-    updateUserStatus: (status: string) => void
-    updateUserProfilePhoto: (file: any) => void
-    saveProfileInfo: (formData: ProfileType) => void
-}
-const ProfileInfo = ({
-                         userData,
+const ProfileInfo: React.FC<ProfilePropsType> = ({
+                         userProfile,
                          status,
                          updateUserStatus,
                          isOwner,
@@ -28,7 +18,7 @@ const ProfileInfo = ({
                          saveProfileInfo,
                          isEditProfileMode,
                          setEditProfileMode
-                     }: ProfileInfoPropsType) => {
+                     }) => {
     //const [editMode, setEditMode] = useState(false);
 
     const onProfilePhotoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -39,7 +29,7 @@ const ProfileInfo = ({
         }
     };
 
-    const onSubmit = (formData: any) => {
+    const onSubmit = (formData: ProfileType) => {
         saveProfileInfo(formData);/*.then(() => {
             setEditMode(false);
         }).catch(error => {
@@ -47,17 +37,17 @@ const ProfileInfo = ({
         });*/
     }
 
-    if (!userData) {
+    if (!userProfile) {
         return <Preloader/>
     }
 
     return (
         <>
             {isEditProfileMode
-                ? <ProfileInfoDataEditForm initialValues={userData} userData={userData} onSubmit={onSubmit}/>
+                ? <ProfileInfoDataEditForm initialValues={userProfile} userProfile={userProfile} onSubmit={onSubmit}/>
                 : <div className={styles.profile}>
                     <div className={styles.profileHeader}>
-                        <img src={userData.photos.small || defaultProfilePhoto} alt="Profile"/>
+                        <img src={userProfile.photos.small || defaultProfilePhoto} alt="Profile"/>
                         {isOwner && <>
                             <input
                                 type="file"
@@ -72,10 +62,10 @@ const ProfileInfo = ({
                             <button onClick={() => setEditProfileMode(true)}>Edit Profile</button>
                         </>
                         }
-                        <h1>{userData.fullName}</h1>
+                        <h1>{userProfile.fullName}</h1>
                         <ProfileStatus status={status} updateUserStatus={updateUserStatus} isOwner={isOwner}/>
                     </div>
-                    <ProfileInfoData userData={userData}/>
+                    <ProfileInfoData userProfile={userProfile}/>
                 </div>}
         </>
 

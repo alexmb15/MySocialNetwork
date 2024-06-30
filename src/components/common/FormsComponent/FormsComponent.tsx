@@ -12,6 +12,10 @@ type FormGeneralErrorType = {
     error: string | null
  }
 
+export type FormGeneralErrorValuesType = {
+    generalError: FormGeneralErrorType
+}
+
 const FormControl = ({meta: {error, touched}, children}: FormControlPropsType) => {
     const hasError = error && touched;
     return <div className={styles.formComponent + " " + (hasError ? styles.error : "")}>

@@ -2,17 +2,20 @@ import {InjectedFormProps, reduxForm} from "redux-form";
 import {maxLength} from "../../../../utils/validators/validators";
 import {createField, Textarea} from "../../../common/FormsComponent/FormsComponent";
 import React from "react";
-import {NewPostTextType} from "../MyPosts";
 
 const maxLength50 = maxLength(50);
-type NewPostTextValueKeysType = Extract<keyof NewPostTextType, string>
-type PropsType = {}
 
-const AddNewPostForm = ({handleSubmit}: InjectedFormProps<NewPostTextType, PropsType> & PropsType) => {
+export type NewPostTextFormValuesType = {
+    newPostText: string
+}
+type PropsType = {}
+type NewPostTextValuesKeysType = Extract<keyof NewPostTextFormValuesType, string>
+
+const AddNewPostForm = ({handleSubmit}: InjectedFormProps<NewPostTextFormValuesType, PropsType> & PropsType) => {
     return (
         <form onSubmit={handleSubmit}>
             <div>
-                {createField<NewPostTextValueKeysType>(
+                {createField<NewPostTextValuesKeysType>(
                     "Enter new message",
                     "newPostText",
                     [maxLength50],
@@ -25,4 +28,4 @@ const AddNewPostForm = ({handleSubmit}: InjectedFormProps<NewPostTextType, Props
         </form>
     )
 }
-export const AddNewPostFormRedux = reduxForm<NewPostTextType>({form: "addNewPostForm"})(AddNewPostForm);
+export const AddNewPostFormRedux = reduxForm<NewPostTextFormValuesType, PropsType>({form: "addNewPostForm"})(AddNewPostForm);

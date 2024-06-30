@@ -2,19 +2,16 @@ import React from 'react';
 import classes from './MyPosts.module.css'
 import Post from './Post/Post';
 import {PostType} from "../../../types/types";
-import {AddNewPostFormRedux} from "./AddNewPostForm/AddNewPostForm";
+import {AddNewPostFormRedux, NewPostTextFormValuesType} from "./AddNewPostForm/AddNewPostForm";
 
 type MyPostsType = {
     posts: Array<PostType>
     addPost: (newPostText: string) => void
 }
-export type NewPostTextType = {
-    newPostText: string
-}
 
 const MyPosts = ({posts, addPost}: MyPostsType) => {
 
-    let onSubmit = (formData: NewPostTextType) => {
+    let onSubmit = (formData: NewPostTextFormValuesType) => {
         console.log(formData.newPostText);
         addPost(formData.newPostText);
     }

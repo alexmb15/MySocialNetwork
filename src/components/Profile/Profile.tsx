@@ -3,8 +3,7 @@ import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
 import {ProfileType} from "../../types/types";
 
-
-type ProfilePropsType = {
+export type ProfilePropsType = {
     userProfile: ProfileType | null
     status: string
     isOwner: boolean
@@ -15,13 +14,13 @@ type ProfilePropsType = {
     updateUserProfilePhoto: (file: any) => void
     saveProfileInfo: (formData: ProfileType) => void
 }
-const Profile = ({
+const Profile: React.FC<ProfilePropsType> = ({
                      userProfile, status, isOwner, isEditProfileMode, setEditProfileMode,
                      updateUserStatus, updateUserProfilePhoto, saveProfileInfo
-                 }: ProfilePropsType) => {
+                 }) => {
     return (
         <div>
-            <ProfileInfo userData={userProfile}
+            <ProfileInfo userProfile={userProfile}
                          status={status}
                          updateUserStatus={updateUserStatus}
                          isOwner={isOwner}
