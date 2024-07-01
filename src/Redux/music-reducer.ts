@@ -26,15 +26,15 @@ let initialState = {
 const musicReducer = (state = initialState, action: ActionTypes): InitialStateType => {
     switch (action.type) {
         case "PLAY-SONG":
-            alert("musicReducer: PLAY");
+            alert(`musicReducer: PLAY Song #${action.songId}`);
             return state;
 
         case "PAUSE-SONG":
-            alert("musicReducer: PAUSE");
+            alert(`musicReducer: PAUSE Song #${action.songId}`);
             return state
 
         case "STOP-SONG":
-            alert("musicReducer: STOP");
+            alert(`musicReducer: STOP Song #${action.songId}`);
             return state;
 
         default:
@@ -44,9 +44,9 @@ const musicReducer = (state = initialState, action: ActionTypes): InitialStateTy
 
 //ActionCreators
 export const actions = {
-    playSongActionCreator: (songId: number) => ({type: "PLAY-SONG", songId} as const),
-    pauseSongActionCreator: (songId: number) => ({type: "PAUSE-SONG", songId} as const),
-    stopSongActionCreator: (songId: number) => ({type: "STOP-SONG", songId} as const)
+    playSong: (songId: number) => ({type: "PLAY-SONG", songId} as const),
+    pauseSong: (songId: number) => ({type: "PAUSE-SONG", songId} as const),
+    stopSong: (songId: number) => ({type: "STOP-SONG", songId} as const)
 }
 
 export default musicReducer;
