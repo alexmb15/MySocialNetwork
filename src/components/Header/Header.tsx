@@ -3,13 +3,13 @@ import styles from './Header.module.css';
 import sn_logo from '../../assets/images/sn_logo.webp'
 import {useNavigate} from 'react-router-dom';
 
-type HeaderPropsType = {
+export type HeaderPropsType = {
     isAuth: boolean
     login: string | null
     logOut: () => void
 }
 
-const Header = ({ isAuth, login, logOut }: HeaderPropsType) => {
+const Header: React.FC<HeaderPropsType> = ({ isAuth, login, logOut }) => {
     const navigate = useNavigate();
 
     const handleLogin = () => {

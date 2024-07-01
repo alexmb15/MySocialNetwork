@@ -9,7 +9,7 @@ type DialogItemPropsType = {
     imgUrl: string | null
     key: number
 }
-const DialogItem = ({id, name, imgUrl}: DialogItemPropsType) => {
+const DialogItem: React.FC<DialogItemPropsType> = ({id, name, imgUrl}) => {
     let path = "/Dialogs/" + id;
     return (
         <div className={classes.dialogsItem}>

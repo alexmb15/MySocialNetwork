@@ -1,10 +1,8 @@
 import React from 'react';
 import styles from './Sidebar.module.css';
+import {SidebarPropsType} from "./SidebarContainer";
 
-/*type SidebarPropsType = {
-    sidebar: any
-}*/
-const Sidebar = ({sidebar}) => {
+const Sidebar: React.FC<SidebarPropsType> = ({sidebar}) => {
 
     let friendsElement = null;
 
