@@ -87,6 +87,11 @@ button:hover {
     background-color: #3b5a7a;
 }
 
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
 /* Стили для ссылок */
 a {
     color: #4a76a8;

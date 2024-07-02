@@ -7,8 +7,8 @@ type GetUsersType = {
     error: string | null
 }
 export const userAPI = {
-    getUsers(currentPage = 1, pageSize = 5) {
-        return instance.get<GetUsersType>(`users?page=${currentPage}&count=${pageSize}`)
+    getUsers(currentPage = 1, pageSize = 5, term = "") {
+        return instance.get<GetUsersType>(`users?page=${currentPage}&count=${pageSize}&term=${term}`)
             .then(response => {
                 //debugger;
                 return response.data;

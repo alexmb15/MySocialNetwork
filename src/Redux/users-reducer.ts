@@ -12,10 +12,10 @@ let initialState = {
     pageSize: 5,
     currentPage: 1,
     followInProgress: [] as Array<number>, //array of userId's
-    /*fake: 1*/
+    filter: {
+        term: ""
+    }
 };
-
-type InitialStateType = typeof initialState
 
 const usersReducer = (state = initialState, action: ActionTypes): InitialStateType => {
     //debugger;
@@ -66,6 +66,11 @@ const usersReducer = (state = initialState, action: ActionTypes): InitialStateTy
                     ? [...state.followInProgress, action.userId]
                     : state.followInProgress.filter(id => id != action.userId)
             }
+        case "SET_FILTER":
+            return {
+                ...state,
+                filter: action.payload
+            }
 
         default:
             return state;
@@ -80,6 +85,7 @@ export const actions = {
     setTotalUsersCount: (totalUsersCount: number) =>
         ({type: 'SET_TOTAL_USERS_COUNT', totalUsersCount} as const),
     setCurrentPage: (currentPage: number) => ({type: 'SET_CURRENT_PAGE', currentPage} as const),
+    setFilter: (term: string) => ({type: 'SET_FILTER', payload: {term}} as const),
     toggleFollowingProgress: (isFetching: boolean, userId: number) => ({
         type: 'TOGGLE_IS_FOLLOWING_PROGRESS',
         isFetching,
@@ -88,11 +94,12 @@ export const actions = {
 }
 
 //ThunkCreators
-export const getUsers = (currentPage: number, pageSize: number): ThunkType => {
+export const getUsers = (currentPage: number, pageSize: number, term: string): ThunkType => {
     return async (dispatch) => {
-        let data = await userAPI.getUsers(currentPage, pageSize);
+        let data = await userAPI.getUsers(currentPage, pageSize, term);
         //console.log(data)
         dispatch(actions.setCurrentPage(currentPage));
+        dispatch(actions.setFilter(term));
         dispatch(actions.setUsers(data.items));
         dispatch(actions.setTotalUsersCount(data.totalCount));
         //debugger
@@ -116,7 +123,7 @@ export const follow = (userId: number): ThunkType => {
     return async (dispatch) => {
         /*let methodAPI = followAPI.follow.bind(followAPI);
         let actionCreator = followUser;*/
-        followUnfollow(dispatch, userId, followAPI.follow.bind(followAPI), actions.followUser);
+        await followUnfollow(dispatch, userId, followAPI.follow.bind(followAPI), actions.followUser);
     }
 }
 
@@ -124,11 +131,13 @@ export const unfollow = (userId: number): ThunkType => {
     return async (dispatch) => {
         /*let methodAPI = followAPI.unfollow.bind(followAPI);
         let actionCreator = unfollowUser;*/
-        followUnfollow(dispatch, userId, followAPI.unfollow.bind(followAPI), actions.unfollowUser);
+        await followUnfollow(dispatch, userId, followAPI.unfollow.bind(followAPI), actions.unfollowUser);
     }
 }
 
 export default usersReducer;
 
+type InitialStateType = typeof initialState
+export type FilterType = typeof initialState.filter
 type ActionTypes = InferActionsTypes<typeof actions>
 type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionTypes>
