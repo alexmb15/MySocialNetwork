@@ -8,15 +8,13 @@ type PaginatorPropsType = {
     pageSize: number;
     currentPage: number;
     onPageChanged: (pageNumber: number) => void;
-    portionSize?: number;
 };
 
 const Paginator: React.FC<PaginatorPropsType> = ({
                                                      totalItemsCount,
                                                      pageSize,
                                                      currentPage,
-                                                     onPageChanged,
-                                                     portionSize = 10,
+                                                     onPageChanged
                                                  }) => {
     const pageCount = Math.ceil(totalItemsCount / pageSize);
 
@@ -32,7 +30,7 @@ const Paginator: React.FC<PaginatorPropsType> = ({
                 onChange={handlePageChange}
                 variant="outlined"
                 shape="rounded"
-                size="large"
+                /*size="large"*/
                 renderItem={(item) => (
                     <PaginationItem
                         {...item}
