@@ -13,7 +13,8 @@ let initialState = {
     currentPage: 1,
     followInProgress: [] as Array<number>, //array of userId's
     filter: {
-        term: ""
+        term: "",
+        friend: null as null | boolean
     }
 };
 
@@ -85,7 +86,7 @@ export const actions = {
     setTotalUsersCount: (totalUsersCount: number) =>
         ({type: 'SET_TOTAL_USERS_COUNT', totalUsersCount} as const),
     setCurrentPage: (currentPage: number) => ({type: 'SET_CURRENT_PAGE', currentPage} as const),
-    setFilter: (term: string) => ({type: 'SET_FILTER', payload: {term}} as const),
+    setFilter: (filter: FilterType) => ({type: 'SET_FILTER', payload: filter} as const),
     toggleFollowingProgress: (isFetching: boolean, userId: number) => ({
         type: 'TOGGLE_IS_FOLLOWING_PROGRESS',
         isFetching,
@@ -94,12 +95,13 @@ export const actions = {
 }
 
 //ThunkCreators
-export const getUsers = (currentPage: number, pageSize: number, term: string): ThunkType => {
+export const getUsers = (currentPage: number, pageSize: number, filter: FilterType): ThunkType => {
     return async (dispatch) => {
-        let data = await userAPI.getUsers(currentPage, pageSize, term);
+        let data = await userAPI.getUsers(currentPage, pageSize, filter.term, filter.friend);
         //console.log(data)
         dispatch(actions.setCurrentPage(currentPage));
-        dispatch(actions.setFilter(term));
+        debugger
+        dispatch(actions.setFilter(filter));
         dispatch(actions.setUsers(data.items));
         dispatch(actions.setTotalUsersCount(data.totalCount));
         //debugger

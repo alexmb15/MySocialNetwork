@@ -1,6 +1,6 @@
 import {createSelector} from "reselect";
 import {AppStateType} from "../redux-store";
-import {ProfileType, UserType} from "../../types/types";
+import {UserType} from "../../types/types";
 
 //get functions
 const getUsers = (state: AppStateType) => {
@@ -36,6 +36,11 @@ export const getUserIdSelector = (state: AppStateType) => {
 export const getIsEditProfileModeSelector = (state: AppStateType) => {
     return state.profilePage.isEditProfileMode;
 }
+export const getUsersFilter = (state: AppStateType) => {
+    return  state.usersPage.filter;
+}
+
+
 
 
 

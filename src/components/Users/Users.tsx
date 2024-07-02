@@ -15,12 +15,14 @@ type UsersPropsType = {
     unfollow: (userId: number) => void
     followInProgress: Array<number>
     onFilterChanged: (filter: FilterType) => void
+    filter: FilterType
 
 }
 
 let Users: React.FC<UsersPropsType> = ({
                  totalUsersCount, pageSize, currentPage,
-                 users, onPageChanged, follow, unfollow, followInProgress, onFilterChanged
+                 users, onPageChanged, follow, unfollow, followInProgress,
+                                           onFilterChanged, filter
              }) => {
 
     let usersElements = users.map(
@@ -31,7 +33,7 @@ let Users: React.FC<UsersPropsType> = ({
 
 
     return <div>
-        <UserSearchForm onFilterChanged={onFilterChanged}/>
+        <UserSearchForm onFilterChanged={onFilterChanged} filter={filter}/>
         {usersElements}
 
         <Paginator totalItemsCount={totalUsersCount}

@@ -73,6 +73,7 @@ body {
 }
 
 button {
+    margin: 10px;
     background-color: #4a76a8;
     color: #fff;
     border: none;

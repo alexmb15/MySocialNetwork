@@ -1,17 +1,27 @@
 import React from "react";
 import {FilterType} from "../../Redux/users-reducer";
 import {Field, Form, Formik} from "formik";
+import styles from "./UserSearchForm.module.css";
 
 type PropsType = {
     onFilterChanged: (filter: FilterType) => void
+    filter: FilterType
+}
+type FormType = {
+    term: string
+    friend: "true" | "false" | "null"
 }
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms))
 
 export const UserSearchForm: React.FC<PropsType> = (props) => {
 
-    const onSubmit = async (values: FilterType/*, {setSubmitting}: {setSubmitting: (isSubmitting: boolean)=>void}*/) => {
-        props.onFilterChanged(values);
+    const onSubmit = async (values: FormType/*, {setSubmitting}: {setSubmitting: (isSubmitting: boolean)=>void}*/) => {
+        const filter: FilterType = {
+            term: values.term,
+            friend: values.friend === "null" ? null : values.friend === "true"
+        }
+        props.onFilterChanged(filter);
         await sleep(1000)
     }
 
@@ -19,22 +29,32 @@ export const UserSearchForm: React.FC<PropsType> = (props) => {
         <div>
             <Formik
                 initialValues={{
-                    term: '',
+                    term: "",
+                    friend: "null"
                 }}
                 onSubmit={onSubmit}
             >
                 {({isSubmitting}) => (
                     <Form>
-                        <label htmlFor="term">Find by name</label>
-                        <Field
-                            id="term"
-                            name="term"
-                            placeholder="David"
-                            type="text"
-                        />
-                        <button type="submit" disabled={isSubmitting}>
-                            Submit
-                        </button>
+                        <div>
+                            <label className={styles.label} htmlFor="term" >Find by name</label>
+                            <Field
+                                id="term"
+                                name="term"
+                                placeholder="David"
+                                type="text"
+                                className={styles.inputField}
+                            />
+                            <label className={styles.label} htmlFor="friend"> Select </label>
+                            <Field className={styles.inputField} name="friend" as="select">
+                                <option value="null"> all</option>
+                                <option value="true"> Only friends</option>
+                                <option value="false"> Without friends</option>
+                            </Field>
+                            <button type="submit" disabled={isSubmitting}>
+                                Submit
+                            </button>
+                        </div>
                     </Form>
                 )}
             </Formik>
