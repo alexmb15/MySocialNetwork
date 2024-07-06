@@ -2,16 +2,23 @@ import React from 'react';
 import styles from './Header.module.css';
 import sn_logo from '../../assets/images/sn_logo.webp'
 import {useNavigate} from 'react-router-dom';
+import {useDispatch, useSelector} from "react-redux";
+import {getIsAuth, getLogin} from "../../Redux/Selectors/user-selectors";
+import {logOut} from "../../Redux/auth-reducer";
 
-export type HeaderPropsType = {
-    isAuth: boolean
-    login: string | null
-    logOut: () => void
-}
+export type HeaderPropsType = {}
 
-const Header: React.FC<HeaderPropsType> = ({ isAuth, login, logOut }) => {
+export const Header: React.FC<HeaderPropsType> = (props) => {
+
+    const login = useSelector(getLogin)
+    const isAuth = useSelector(getIsAuth)
+    const dispatch = useDispatch();
     const navigate = useNavigate();
 
+    const logout = () => {
+        debugger;
+        dispatch(logOut());
+    }
     const handleLogin = () => {
         navigate('/login');
     };
@@ -31,7 +38,7 @@ const Header: React.FC<HeaderPropsType> = ({ isAuth, login, logOut }) => {
                         <div className={styles.dropdownMenu}>
                             <button onClick={handleProfile}>Profile</button>
                             {/*<Link to="/Profile">Profile</Link>*/}
-                            <button onClick={logOut}>Logout</button>
+                            <button onClick={logout}>Logout</button>
                         </div>
                     </>
                 ) : (

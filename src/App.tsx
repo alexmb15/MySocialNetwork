@@ -4,10 +4,9 @@ import Navbar from './components/Navbar/Navbar';
 import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
 import Settings from "./components/Settings/Settings";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
-import UsersContainer from "./components/Users/UsersContainer";
+import {UsersContainer} from "./components/Users/UsersContainer";
 import MusicContainer from "./components/Music/MusicContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
-import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
 import {connect} from "react-redux";
 import {initializeApp} from "./Redux/app-reducer";
@@ -15,6 +14,7 @@ import Preloader from "./components/common/Preloader/Preloader";
 import {compose} from "redux";
 import NewsContainer from "./components/News/NewsContainer";
 import {AppStateType} from "./Redux/redux-store";
+import Header from "./components/Header/Header";
 
 type StatePropsType = ReturnType<typeof mapStateToProps>
 type DispatchPropsType = {
@@ -44,7 +44,7 @@ class App extends Component<StatePropsType & DispatchPropsType, {}> {
         return (
             <BrowserRouter>
                 <div className='app-wrapper'>
-                    <HeaderContainer/>
+                    <Header/>
                     <Navbar/>
                     <div className='app-wrapper-content'>
                         <Routes>
