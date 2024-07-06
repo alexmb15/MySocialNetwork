@@ -12,6 +12,7 @@ let initialState = {
     pageSize: 5,
     currentPage: 1,
     followInProgress: [] as Array<number>, //array of userId's
+    isFetching: true,
     filter: {
         term: "",
         friend: null as null | boolean
@@ -67,6 +68,11 @@ const usersReducer = (state = initialState, action: ActionTypes): InitialStateTy
                     ? [...state.followInProgress, action.userId]
                     : state.followInProgress.filter(id => id != action.userId)
             }
+        case "TOGGLE_IS_FETCHING":
+            return {
+                ...state,
+                isFetching: action.isFetching
+            }
         case "SET_FILTER":
             return {
                 ...state,
@@ -91,20 +97,21 @@ export const actions = {
         type: 'TOGGLE_IS_FOLLOWING_PROGRESS',
         isFetching,
         userId
-    } as const)
+    } as const),
+    toggleIsFetching: (isFetching: boolean) => ({type: 'TOGGLE_IS_FETCHING', isFetching} as const)
 }
 
 //ThunkCreators
 export const getUsers = (currentPage: number, pageSize: number, filter: FilterType): ThunkType => {
     return async (dispatch) => {
+        dispatch(actions.toggleIsFetching(true))
         let data = await userAPI.getUsers(currentPage, pageSize, filter.term, filter.friend);
         //console.log(data)
         dispatch(actions.setCurrentPage(currentPage));
-        debugger
         dispatch(actions.setFilter(filter));
         dispatch(actions.setUsers(data.items));
         dispatch(actions.setTotalUsersCount(data.totalCount));
-        //debugger
+        dispatch(actions.toggleIsFetching(false))
     }
 }
 

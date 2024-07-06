@@ -23,7 +23,6 @@ export const getPosts = (state: AppStateType) => {
     return state.profilePage.posts;
 }
 
-
 export const getUserProfileSelector = (state: AppStateType) => {
     return state.profilePage.userProfile;
 }
@@ -39,6 +38,16 @@ export const getIsEditProfileModeSelector = (state: AppStateType) => {
 export const getUsersFilter = (state: AppStateType) => {
     return  state.usersPage.filter;
 }
+export const getLogin = (state: AppStateType) => {
+    return  state.auth.login;
+}
+export const getIsAuth = (state: AppStateType) => {
+    return  state.auth.isAuth;
+}
+export const getIsFetching = (state: AppStateType) => {
+    return  state.usersPage.isFetching;
+}
+
 
 
 
