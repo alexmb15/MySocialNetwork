@@ -1,10 +1,8 @@
 import {ResultCodeForCaptchaEnum, ResultCodesEnum} from "../api/api"
 import {FormAction, stopSubmit} from "redux-form"
-import {ThunkAction} from "redux-thunk";
-import {AppStateType, BaseThunkType, InferActionsTypes} from "./redux-store";
+import {BaseThunkType, InferActionsTypes} from "./redux-store";
 import {authAPI} from "../api/authAPI";
 import {securityAPI} from "../api/securityAPI";
-import {Action} from "redux";
 
 let initialState = {
     userId: null as (number | null),
@@ -32,7 +30,7 @@ const authReducer = (state = initialState, action: ActionTypes): InitialStateTyp
 
 //ActionCreators
 
-export const actions = {
+export const authActions = {
     setAuthUserData: (userId: number | null, login: string | null, email: string | null, isAuth: boolean) =>
         ({
             type: "SET_AUTH_USER_DATA",
@@ -49,9 +47,9 @@ export const getAuthUserData = (): ThunkType => {
             //debugger;
             if (data.resultCode === ResultCodesEnum.Success) {
                 let {id, login, email} = data.data;
-                dispatch(actions.setAuthUserData(id, login, email, true));
+                dispatch(authActions.setAuthUserData(id, login, email, true));
             } else {
-                dispatch(actions.setAuthUserData(null, null, null, false));
+                dispatch(authActions.setAuthUserData(null, null, null, false));
             }
         } catch (error) {
             alert(error);
@@ -88,7 +86,7 @@ export const logOut = (): ThunkType => {
             //console.log(data)
             debugger;
             if (data.resultCode === 0) {
-                dispatch(actions.setAuthUserData(null, null, null, false));
+                dispatch(authActions.setAuthUserData(null, null, null, false));
             }
         } catch (error) {
             alert(error);
@@ -102,7 +100,7 @@ export const getCaptcha = (): ThunkType => {
             const data = await securityAPI.getCaptcha();
             //console.log(data)
             if (data.url)
-                dispatch(actions.setCaptcha(data.url));
+                dispatch(authActions.setCaptcha(data.url));
         } catch (error) {
             alert(error);
         }
@@ -113,5 +111,5 @@ export const getCaptcha = (): ThunkType => {
 export default authReducer;
 
 type InitialStateType = typeof initialState
-type ActionTypes = InferActionsTypes<typeof actions>
+type ActionTypes = InferActionsTypes<typeof authActions>
 type ThunkType = BaseThunkType<ActionTypes | FormAction>

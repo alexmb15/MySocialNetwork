@@ -20,7 +20,7 @@ const appReducer = (state = initialState, action: ActionTypes): InitialStateType
 }
 
 //ActionCreators
-export const actions = {
+export const appActions = {
     initializeSucceed: () => ({ type: "SET_INITIALIZED" } as const)
 }
 
@@ -30,7 +30,7 @@ export const initializeApp = (): ThunkAction<void, AppStateType, unknown, Action
     return (dispatch) => {
         let dispatchResponse = dispatch(getAuthUserData());
         Promise.all([dispatchResponse]).then( () => {
-            dispatch(actions.initializeSucceed());
+            dispatch(appActions.initializeSucceed());
         });
     }
 }
@@ -38,4 +38,4 @@ export const initializeApp = (): ThunkAction<void, AppStateType, unknown, Action
 export default appReducer;
 
 type InitialStateType = typeof initialState
-type ActionTypes = InferActionsTypes<typeof actions>
+type ActionTypes = InferActionsTypes<typeof appActions>

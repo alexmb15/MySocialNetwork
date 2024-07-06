@@ -2,7 +2,7 @@ import React from "react";
 import Profile from "./Profile";
 import {connect} from "react-redux";
 import {
-    actions,
+    profileActions,
     getUserProfile,
     getUserStatus,
     saveProfileInfo,
@@ -83,6 +83,6 @@ export default compose<React.ComponentType>(
     //withAuthRedirect,
     connect(mapStateToProps,
         {getUserProfile, getUserStatus, updateUserStatus,
-            updateUserProfilePhoto, saveProfileInfo, setEditProfileMode: actions.setEditProfileMode}),
+            updateUserProfilePhoto, saveProfileInfo, setEditProfileMode: profileActions.setEditProfileMode}),
     withRouter
 )(ProfileContainer)

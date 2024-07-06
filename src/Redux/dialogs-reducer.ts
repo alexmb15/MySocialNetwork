@@ -32,7 +32,7 @@ const dialogsReducer = (state = initialState, action: ActionTypes): InitialDialo
 }
 
 //ActionCreators
-export const actions = {
+export const dialogsActions = {
     /*addDialogMessageActionCreator: (newDialogMessage: string) => (
         { type: "ADD-DIALOG-MESSAGE", newDialogMessage } as const)*/
     addDialogMessage: (newDialogMessage: string) => (
@@ -43,4 +43,4 @@ export const actions = {
 export default dialogsReducer
 
 export type InitialDialogStateType = typeof initialState
-type ActionTypes = InferActionsTypes<typeof actions>
+type ActionTypes = InferActionsTypes<typeof dialogsActions>

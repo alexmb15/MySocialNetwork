@@ -59,7 +59,7 @@ const profileReducer = (state = initialState, action: ActionTypes): InitialState
 }
 
 //ActionCreators
-export const actions = {
+export const profileActions = {
     addPost: (newPostText: string) => ({type: "ADD_POST", newPostText}as const),
     setUserProfile: (userProfile: ProfileType) => ({type: "SET_USER_PROFILE", userProfile}as const),
     setUserStatus: (status: string) => ({type: "SET_USER_STATUS", status}as const),
@@ -75,7 +75,7 @@ export const getUserProfile = (userId: number): ThunkType => {
         try {
             const data = await profileAPI.getProfile(userId);
             //debugger;
-            dispatch(actions.setUserProfile(data));
+            dispatch(profileActions.setUserProfile(data));
             //console.log(data);
         } catch (e) {
             alert(e);
@@ -87,7 +87,7 @@ export const getUserStatus = (userId: number): ThunkType => {
         try {
             const data = await profileAPI.getUserStatus(userId);
             //console.log(data);
-            dispatch(actions.setUserStatus(data));
+            dispatch(profileActions.setUserStatus(data));
         } catch (e) {
             alert(e);
         }
@@ -100,7 +100,7 @@ export const updateUserStatus = (status: string): ThunkType => {
             const data = await profileAPI.updateUserStatus(status);
             //console.log(data);
             if (data.resultCode === 0) {
-                dispatch(actions.setUserStatus(status))
+                dispatch(profileActions.setUserStatus(status))
             } else if (data.resultCode === 1) {
                 alert(data);
             }
@@ -117,7 +117,7 @@ export const updateUserProfilePhoto = (file: File): ThunkType => {
             //console.log(data);
             if (data.resultCode === 0) {
                 //debugger;
-                dispatch(actions.setUserPhoto(data.data.photos));
+                dispatch(profileActions.setUserPhoto(data.data.photos));
             } else if (data.resultCode === 1) {
                 alert(data.messages[0]);
             }
@@ -136,7 +136,7 @@ export const saveProfileInfo = (profileData: ProfileType): ThunkType => {
             if (data.resultCode === 0) {
                 if(userId!=null){
                     dispatch(getUserProfile(userId));
-                    dispatch(actions.setEditProfileMode(false));
+                    dispatch(profileActions.setEditProfileMode(false));
                 }else {
                     throw new Error("userId can't be null")
                 }
@@ -151,7 +151,7 @@ export const saveProfileInfo = (profileData: ProfileType): ThunkType => {
                         [UploadError]: errorMessage
                     }
                 }));
-                dispatch(actions.setEditProfileMode(true));
+                dispatch(profileActions.setEditProfileMode(true));
                 //return Promise.reject(new Error(errorMessage));
             }
         } catch (e) {
@@ -162,6 +162,6 @@ export const saveProfileInfo = (profileData: ProfileType): ThunkType => {
 
 export default profileReducer;
 
-type ActionTypes = InferActionsTypes<typeof actions>
+type ActionTypes = InferActionsTypes<typeof profileActions>
 type ThunkType = BaseThunkType<ActionTypes | FormAction>
 type InitialStateType = typeof initialState;

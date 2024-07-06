@@ -43,7 +43,7 @@ const musicReducer = (state = initialState, action: ActionTypes): InitialStateTy
 }
 
 //ActionCreators
-export const actions = {
+export const musicActions = {
     playSong: (songId: number) => ({type: "PLAY-SONG", songId} as const),
     pauseSong: (songId: number) => ({type: "PAUSE-SONG", songId} as const),
     stopSong: (songId: number) => ({type: "STOP-SONG", songId} as const)
@@ -58,4 +58,4 @@ type SongType = {
     songUrl: string
 }
 type InitialStateType = typeof initialState
-type ActionTypes = InferActionsTypes<typeof actions>
+type ActionTypes = InferActionsTypes<typeof musicActions>

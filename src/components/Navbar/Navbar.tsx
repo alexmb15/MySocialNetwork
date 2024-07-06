@@ -1,8 +1,7 @@
 import React from 'react';
 import classes from './Navbar.module.css';
 import {NavLink} from "react-router-dom";
-import SidebarContainer from "./Sidebar/SidebarContainer";
-
+import Sidebar from "./Sidebar/Sidebar";
 
 
 const Navbar = () => {
@@ -39,7 +38,7 @@ const Navbar = () => {
                 </NavLink>
             </div>
             <div>
-                <SidebarContainer />
+                <Sidebar />
             </div>
         </nav>
     );

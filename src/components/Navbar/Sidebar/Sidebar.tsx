@@ -1,9 +1,13 @@
 import React from 'react';
 import styles from './Sidebar.module.css';
-import {SidebarPropsType} from "./SidebarContainer";
+import {useSelector} from "react-redux";
+import {getSidebar} from "../../../Redux/Selectors/user-selectors";
 
-const Sidebar: React.FC<SidebarPropsType> = ({sidebar}) => {
+type PropsType = {}
 
+export const Sidebar: React.FC<PropsType> = () => {
+
+    const sidebar = useSelector(getSidebar)
     let friendsElement = null;
 
     if(sidebar.friends){

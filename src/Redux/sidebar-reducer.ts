@@ -20,14 +20,22 @@ const sidebarReducer = (state = initialState, action: ActionTypes): InitialState
                 ...state,
                 friends: [...state.friends, newFriend]
             }
+        case "SET_USERS":
+            return {
+                ...state,
+                friends: action.users
+            }
     }
     return state;
 }
 
 //ActionCreators
-export const actions = {
-    AddNewFriendActionCreator: (userId: number, fullName: string) => (
+export const sidebarActions = {
+    addNewFriend: (userId: number, fullName: string) => (
         { type: "ADD_NEW_FRIEND", userId, fullName } as const
+    ),
+    setFriends: (users: Array<FriendType>) => (
+        { type: "SET_USERS", users} as const
     )
 }
 
@@ -40,4 +48,4 @@ type FriendType = {
     name: string
 }
 type InitialStateType = typeof initialState
-type ActionTypes = InferActionsTypes<typeof actions>
+type ActionTypes = InferActionsTypes<typeof sidebarActions>
