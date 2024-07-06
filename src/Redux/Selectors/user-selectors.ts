@@ -47,6 +47,9 @@ export const getIsAuth = (state: AppStateType) => {
 export const getIsFetching = (state: AppStateType) => {
     return  state.usersPage.isFetching;
 }
+export const getCaptchaURL = (state: AppStateType) => {
+    return  state.auth.captchaURL;
+}
 
 
 

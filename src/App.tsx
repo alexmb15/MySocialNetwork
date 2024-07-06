@@ -7,7 +7,7 @@ import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import {UsersContainer} from "./components/Users/UsersContainer";
 import MusicContainer from "./components/Music/MusicContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
-import Login from "./components/Login/Login";
+import {Login} from "./components/Login/Login";
 import {connect} from "react-redux";
 import {initializeApp} from "./Redux/app-reducer";
 import Preloader from "./components/common/Preloader/Preloader";
