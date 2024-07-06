@@ -128,7 +128,7 @@ const followUnfollow = async (dispatch: Dispatch<ActionTypes>, userId: number, m
     });*/
 }
 
-export const follow = (userId: number): ThunkType => {
+export const followUser = (userId: number): ThunkType => {
     return async (dispatch) => {
         /*let methodAPI = followAPI.follow.bind(followAPI);
         let actionCreator = followUser;*/
@@ -136,7 +136,7 @@ export const follow = (userId: number): ThunkType => {
     }
 }
 
-export const unfollow = (userId: number): ThunkType => {
+export const unfollowUser = (userId: number): ThunkType => {
     return async (dispatch) => {
         /*let methodAPI = followAPI.unfollow.bind(followAPI);
         let actionCreator = unfollowUser;*/
