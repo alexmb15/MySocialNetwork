@@ -12,8 +12,10 @@ import {
     getUsersFilter,
     getUsersSelector
 } from "../../Redux/Selectors/user-selectors";
+import {useSearchParams} from "react-router-dom";
 
 type UsersPropsType = {}
+type QueryParamsType = { term?: string; page?: string; friend?: string }
 
 let Users: React.FC<UsersPropsType> = (props) => {
 
@@ -25,9 +27,40 @@ let Users: React.FC<UsersPropsType> = (props) => {
     const filter = useSelector(getUsersFilter)
     const dispatch = useDispatch()
 
+    const [searchParams, setSearchParams] = useSearchParams();
+    const queryParams: QueryParamsType = {}
+
+    console.log(searchParams)
+
     useEffect(() => {
-        dispatch(getUsers(currentPage, pageSize, filter))
+        let actualPage = currentPage
+        let actualFiler = filter
+
+        if (searchParams.has("page")) actualPage = Number(searchParams.get("page"))
+        if (searchParams.has("term")) actualFiler = {...actualFiler, term: searchParams.get("term") as string}
+        switch (searchParams.get("friend")) {
+            case "null":
+                actualFiler = {...actualFiler, friend: null}
+                break
+            case "true":
+                actualFiler = {...actualFiler, friend: true}
+                break
+            case "false":
+                actualFiler = {...actualFiler, friend: false}
+                break
+        }
+
+
+        dispatch(getUsers(actualPage, pageSize, actualFiler))
     }, [])
+
+    useEffect(() => {
+        if (currentPage !== 1) queryParams.page = String(currentPage)
+        if (!!filter.term) queryParams.term = filter.term
+        if (filter.friend !== null) queryParams.friend = String(filter.friend)
+
+        setSearchParams(queryParams)
+    }, [filter, currentPage])
 
     const follow = (userId: number) => {
         dispatch(followUser(userId))

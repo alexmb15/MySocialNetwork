@@ -7,9 +7,10 @@ type PropsType = {
     onFilterChanged: (filter: FilterType) => void
     filter: FilterType
 }
+type FriendFormType = 'true' | 'false' | 'null'
 type FormType = {
     term: string
-    friend: "true" | "false" | "null"
+    friend: FriendFormType
 }
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms))
@@ -28,9 +29,10 @@ export const UserSearchForm: React.FC<PropsType> = (props) => {
     return (
         <div>
             <Formik
+                enableReinitialize
                 initialValues={{
-                    term: "",
-                    friend: "null"
+                    term: props.filter.term,
+                    friend: String(props.filter.friend) as FriendFormType
                 }}
                 onSubmit={onSubmit}
             >
