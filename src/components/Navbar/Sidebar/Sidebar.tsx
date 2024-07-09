@@ -1,17 +1,23 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import styles from './Sidebar.module.css';
-import {useSelector} from "react-redux";
-import {getSidebar} from "../../../Redux/Selectors/user-selectors";
+import {useDispatch, useSelector} from "react-redux";
+import {getFriendsSelector} from "../../../Redux/Selectors/user-selectors";
+import {getFriends} from "../../../Redux/sidebar-reducer";
 
 type PropsType = {}
 
 export const Sidebar: React.FC<PropsType> = () => {
-
-    const sidebar = useSelector(getSidebar)
     let friendsElement = null;
+    const friends = useSelector(getFriendsSelector)
+    const dispatch = useDispatch()
 
-    if(sidebar.friends){
-        friendsElement = sidebar.friends.map( f => <a key={f.id}> {f.name}</a>);
+    useEffect(() => {
+        dispatch(getFriends())
+    }, [])
+
+    if(friends){
+        //console.log(friends)
+        friendsElement = friends.map( f => <a key={f.id}> {f.name}</a>);
     }
 
     return (

@@ -12,9 +12,9 @@ import {connect} from "react-redux";
 import {initializeApp} from "./Redux/app-reducer";
 import Preloader from "./components/common/Preloader/Preloader";
 import {compose} from "redux";
-import NewsContainer from "./components/News/NewsContainer";
 import {AppStateType} from "./Redux/redux-store";
 import Header from "./components/Header/Header";
+import ChatPage from "./components/Chat/ChatPage";
 
 type StatePropsType = ReturnType<typeof mapStateToProps>
 type DispatchPropsType = {
@@ -54,7 +54,7 @@ class App extends Component<StatePropsType & DispatchPropsType, {}> {
                             </Route>
                             <Route path="/Dialogs/*" element={<DialogsContainer/>}/>
                             <Route path="/Users/*" element={<UsersContainer/>}/>
-                            <Route path='/News' element={<NewsContainer/>}/>
+                            <Route path='/ChatPage' element={<ChatPage/>}/>
                             <Route path='/Music' element={<MusicContainer/>}/>
                             <Route path='/Settings' element={<Settings/>}/>
                             <Route path='/Login' element={<Login/>}/>

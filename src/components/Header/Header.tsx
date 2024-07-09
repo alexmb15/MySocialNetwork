@@ -16,7 +16,7 @@ export const Header: React.FC<HeaderPropsType> = (props) => {
     const navigate = useNavigate();
 
     const logout = () => {
-        debugger;
+        //debugger;
         dispatch(logOut());
     }
     const handleLogin = () => {

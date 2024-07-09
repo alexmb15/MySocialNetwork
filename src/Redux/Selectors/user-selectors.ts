@@ -50,13 +50,12 @@ export const getIsFetching = (state: AppStateType) => {
 export const getCaptchaURL = (state: AppStateType) => {
     return  state.auth.captchaURL;
 }
-export const getSidebar = (state: AppStateType) => {
-    return state.sidebar;
+export const getFriendsSelector = (state: AppStateType) => {
+    return state.sidebar.friends;
 }
-
-
-
-
+export const getMessageSelector = (state: AppStateType) => {
+    return state.chat.messages;
+}
 
 
 //selectors

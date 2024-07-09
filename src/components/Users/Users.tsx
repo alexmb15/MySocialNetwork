@@ -30,7 +30,7 @@ let Users: React.FC<UsersPropsType> = (props) => {
     const [searchParams, setSearchParams] = useSearchParams();
     const queryParams: QueryParamsType = {}
 
-    console.log(searchParams)
+    //console.log(searchParams)
 
     useEffect(() => {
         let actualPage = currentPage

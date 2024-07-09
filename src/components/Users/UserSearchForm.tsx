@@ -13,8 +13,6 @@ type FormType = {
     friend: FriendFormType
 }
 
-const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms))
-
 export const UserSearchForm: React.FC<PropsType> = (props) => {
 
     const onSubmit = async (values: FormType/*, {setSubmitting}: {setSubmitting: (isSubmitting: boolean)=>void}*/) => {
@@ -23,7 +21,6 @@ export const UserSearchForm: React.FC<PropsType> = (props) => {
             friend: values.friend === "null" ? null : values.friend === "true"
         }
         props.onFilterChanged(filter);
-        await sleep(1000)
     }
 
     return (

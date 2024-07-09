@@ -5,11 +5,12 @@ import {AppStateType, InferActionsTypes} from "./redux-store";
 import {Dispatch} from "redux";
 import {userAPI} from "../api/userAPI";
 import {followAPI} from "../api/followAPI";
+import {sidebarActions} from "./sidebar-reducer";
 
 let initialState = {
     users: [] as Array<UserType>,
     totalUsersCount: 0,
-    pageSize: 5,
+    pageSize: 10,
     currentPage: 1,
     followInProgress: [] as Array<number>, //array of userId's
     isFetching: true,
@@ -48,7 +49,7 @@ const usersReducer = (state = initialState, action: ActionTypes): InitialStateTy
         case "SET_USERS":
             return {
                 ...state,
-                users: [...action.users]
+                users: action.users
             }
         case "SET_TOTAL_USERS_COUNT":
             return {
@@ -110,7 +111,6 @@ export const getUsers = (currentPage: number, pageSize: number, filter: FilterTy
         dispatch(usersActions.setCurrentPage(currentPage));
         dispatch(usersActions.setFilter(filter));
         dispatch(usersActions.setUsers(data.items));
-
         dispatch(usersActions.setTotalUsersCount(data.totalCount));
         dispatch(usersActions.toggleIsFetching(false))
     }

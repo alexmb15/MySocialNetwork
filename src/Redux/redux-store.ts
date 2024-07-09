@@ -9,6 +9,7 @@ import authReducer from "./auth-reducer";
 import {reducer as formReducer} from "redux-form";
 import appReducer from "./app-reducer";
 import {configureStore} from "@reduxjs/toolkit";
+import chatReducer from "./chat-reducer";
 
 
 let rootReducer = combineReducers({
@@ -19,6 +20,7 @@ let rootReducer = combineReducers({
     sidebar: sidebarReducer,
     auth: authReducer,
     app: appReducer,
+    chat: chatReducer,
     form: formReducer
 })
 

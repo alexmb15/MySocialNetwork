@@ -1,51 +1,62 @@
-import {InferActionsTypes} from "./redux-store";
+import {BaseThunkType, InferActionsTypes} from "./redux-store";
+import {userAPI} from "../api/userAPI";
 
 let initialState =  {
-    friends: [
-        {id: 1, userId: 2, name: "samurai dimych"},
-        {id: 2, userId: 9, name: "Jak Zigil`man"},
-        {id: 3, userId: 11, name: "Sol"}
-    ] as Array<FriendType>
+    friends: [] as Array<FriendType>
 };
 
 const sidebarReducer = (state = initialState, action: ActionTypes): InitialStateType => {
     switch (action.type) {
-        case "ADD_NEW_FRIEND":
+        case "SIDEBAR/ADD_NEW_FRIEND":
             let newFriend = {
-                id: state.friends[state.friends.length-1].id + 1,
-                userId: action.userId,
+                id: action.userId,
                 name: action.fullName
             }
             return {
                 ...state,
                 friends: [...state.friends, newFriend]
             }
-        case "SET_USERS":
+
+        case "SIDEBAR/SET_FRIENDS":
             return {
                 ...state,
-                friends: action.users
+                friends: action.friends
             }
+
+        default:
+            return state;
     }
-    return state;
 }
 
 //ActionCreators
 export const sidebarActions = {
     addNewFriend: (userId: number, fullName: string) => (
-        { type: "ADD_NEW_FRIEND", userId, fullName } as const
+        { type: "SIDEBAR/ADD_NEW_FRIEND", userId, fullName } as const
     ),
-    setFriends: (users: Array<FriendType>) => (
-        { type: "SET_USERS", users} as const
+    setFriends: (friends: Array<FriendType>) => (
+        { type: "SIDEBAR/SET_FRIENDS", friends} as const
     )
 }
 
+//ThunkCreators
+export const getFriends = ():ThunkType => {
+    return async (dispatch) => {
+        let data = await userAPI.getUsers(1, 10, "", true);
+        if(data.items.length > 5) {
+            data.items = data.items.slice(0,5)
+        }
+        let friends: Array<FriendType> = data.items.map(({id, name}) => ({id, name}))
+        dispatch(sidebarActions.setFriends(friends))
+        //console.log(friends)
+    }
+}
 
 export default sidebarReducer;
 
 type FriendType = {
     id: number,
-    userId: number,
     name: string
 }
 type InitialStateType = typeof initialState
 type ActionTypes = InferActionsTypes<typeof sidebarActions>
+type ThunkType = BaseThunkType<ActionTypes>
