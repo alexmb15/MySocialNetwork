@@ -1,80 +1,99 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef} from 'react';
 import {SubmitHandler, useForm} from "react-hook-form";
 import {withAuthRedirect} from "../hoc/withAuthRedirect";
 import {useDispatch, useSelector} from "react-redux";
 import {sendMessage, startMessageListening, stopMessageListening} from "../../Redux/chat-reducer";
-import {getMessageSelector} from "../../Redux/Selectors/user-selectors";
+import {getMessageSelector, getStatusSelector, getUserIdSelector} from "../../Redux/Selectors/user-selectors";
+import styles from './ChatPage.module.css';
 
 const ChatPage = (props: any) => {
     return (
-        <div>
+        <div className={styles.chatPage}>
             <Chat/>
         </div>
     );
 };
 
 const Chat = (props: any) => {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
+    const status = useSelector(getStatusSelector);
 
     useEffect(() => {
-        dispatch(startMessageListening())
+        dispatch(startMessageListening());
         return () => {
-            dispatch(stopMessageListening())
+            dispatch(stopMessageListening());
         }
+    }, [dispatch]);
 
-    }, [])
-
-    return (
-        <div>
-            <Messages/>
-            <AddNewMessageForm/>
-        </div>
-    );
-};
-
-const Messages: React.FC = () => {
-    const messages = useSelector(getMessageSelector)
-
-    return (
-        <div style={{height: '800px', overflowY: 'auto'}}>
-            {messages.map((m, index) => <Message key={index} message={m}/>)}
-        </div>
-    );
-};
-
-const Message: React.FC<{ message: MessageType }> = ({message}) => {
-    return <div>
-        <img src={message.photo}/> <b>{message.userName}</b>
-        <br/>
-        {message.message}
-        <hr/>
-    </div>
+    return <>{status === "error" && <div>Some error occurred. Please refresh the page!</div>}
+            <div className={styles.chat}>
+                <Messages/>
+                <AddNewMessageForm />
+            </div>
+        </>
 }
 
+const Messages: React.FC = React.memo(() => {
+    console.log(">>> Messages!!!")
+    const messages = useSelector(getMessageSelector)
+    const messagesEndRef = useRef<HTMLDivElement | null>(null)
+
+    const scrollToBottom = () => {
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth"})
+    };
+
+    useEffect(() => {
+        scrollToBottom()
+    }, [messages])
+
+
+    return (
+        <div className={styles.messages}>
+            {messages.map((m) => <Message key={m.id} message={m}/>)}
+            <div ref={messagesEndRef} />
+        </div>
+    )
+})
+
+const Message: React.FC<{ message: MessageType }> = React.memo(({message}) => {
+    console.log(">>>>> Message")
+    const myUserId = useSelector(getUserIdSelector); // Замените на правильный селектор для получения ID текущего пользователя
+    const isMyMessage = message.userId === myUserId;
+
+    return (
+        <div className={`${styles.message} ${isMyMessage ? styles.mine : ''}`}>
+            <img src={message.photo} alt="User avatar"/>
+            <div className={styles.messageContent}>
+                <b>{message.userName}</b>
+                <p>{message.message}</p>
+            </div>
+        </div>
+    )
+})
+
 const AddNewMessageForm: React.FC<{}> = ({}) => {
-    const dispatch = useDispatch()
-    const [readyStatus, setReadyStatus] = useState<'pending' | 'ready'>('pending')
+    const dispatch = useDispatch();
+    const status = useSelector(getStatusSelector);
+
     const {register, handleSubmit} = useForm<ChatMessageFormDataType>({
         defaultValues: {
             newMessage: ""
         }
     });
 
-
     const onSubmit: SubmitHandler<ChatMessageFormDataType> = (formData) => {
         if (!formData.newMessage) {
-            console.log(formData.newMessage)
-            return
+            console.log(formData.newMessage);
+            return;
         }
-        debugger
-        dispatch(sendMessage(formData.newMessage))
+        dispatch(sendMessage(formData.newMessage));
     };
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)} className={styles.addNewMessageForm}>
             <textarea {...register("newMessage")} placeholder="Enter new message"/>
             <div>
-                <input type="submit"/>
+                <input disabled={status !== 'ready'} type="submit"/>
             </div>
         </form>
     );

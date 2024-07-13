@@ -1,0 +1,116 @@
+/* ChatPage.module.css */
+
+.chatPage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.chat {
+    width: 100%;
+    background-color: #ffffff;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.messages {
+    flex-grow: 1;
+    height: 800px;
+    overflow-y: auto;
+    padding: 20px;
+    border-bottom: 1px solid #dee2e6;
+    background: linear-gradient(to bottom, #f8f9fa, #ffffff);
+}
+
+.message {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f8f9fa;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+}
+
+.message:hover {
+    transform: scale(1.02);
+}
+
+.message img {
+    border-radius: 50%;
+    width: 60px; /* Увеличим размер аватара */
+    height: 60px;
+    margin-right: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.message.mine {
+    background-color: #d1ecf1;
+}
+
+.messageContent {
+    display: flex;
+    flex-direction: column;
+}
+
+.message b {
+    color: #343a40;
+    font-weight: 600;
+}
+
+.message p {
+    margin: 5px 0;
+    color: #495057;
+}
+
+.addNewMessageForm {
+    padding: 20px;
+    background-color: #f1f3f5;
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid #dee2e6;
+}
+
+.addNewMessageForm textarea {
+    width: 95%;
+    height: 50px;
+    padding: 15px;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    resize: none;
+    font-family: 'Segoe UI', sans-serif;
+    margin-bottom: 10px;
+    transition: border-color 0.3s ease;
+}
+
+.addNewMessageForm textarea:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.addNewMessageForm input[type="submit"] {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    background-color: #4a76a8;
+    color: #ffffff;
+    cursor: pointer;
+    font-family: 'Segoe UI', sans-serif;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.addNewMessageForm input[type="submit"]:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+}
+
+.addNewMessageForm input[type="submit"]:hover:not(:disabled) {
+    background-color: #3b5a7a;
+    box-shadow: 0 0 10px rgba(0, 86, 179, 0.5);
+}
