@@ -1,8 +1,8 @@
 import React, {useEffect} from 'react';
 import styles from './Sidebar.module.css';
 import {useDispatch, useSelector} from "react-redux";
-import {getFriendsSelector} from "../../../Redux/Selectors/user-selectors";
 import {getFriends} from "../../../Redux/sidebar-reducer";
+import {getFriendsSelector} from "../../../Redux/Selectors/sidebar-selectors";
 
 type PropsType = {}
 

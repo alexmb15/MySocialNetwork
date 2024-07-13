@@ -3,7 +3,7 @@ import MyPosts from "./MyPosts";
 import {connect} from "react-redux";
 import {AppStateType} from "../../../Redux/redux-store";
 import {PostType} from "../../../types/types";
-import {getPosts} from "../../../Redux/Selectors/user-selectors";
+import {getPosts} from "../../../Redux/Selectors/profile-selectors";
 
 type MapStateToPropsType = {
     posts: Array<PostType>

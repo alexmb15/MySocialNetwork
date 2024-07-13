@@ -3,8 +3,9 @@ import {SubmitHandler, useForm} from "react-hook-form";
 import {withAuthRedirect} from "../hoc/withAuthRedirect";
 import {useDispatch, useSelector} from "react-redux";
 import {sendMessage, startMessageListening, stopMessageListening} from "../../Redux/chat-reducer";
-import {getMessageSelector, getStatusSelector, getUserIdSelector} from "../../Redux/Selectors/user-selectors";
 import styles from './ChatPage.module.css';
+import {getUserIdSelector} from "../../Redux/Selectors/auth-selectors";
+import {getMessageSelector, getStatusSelector} from "../../Redux/Selectors/chat-selectors";
 
 const ChatPage = (props: any) => {
     return (

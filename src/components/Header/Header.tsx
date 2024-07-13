@@ -3,8 +3,8 @@ import styles from './Header.module.css';
 import sn_logo from '../../assets/images/sn_logo.webp'
 import {useNavigate} from 'react-router-dom';
 import {useDispatch, useSelector} from "react-redux";
-import {getIsAuth, getLogin} from "../../Redux/Selectors/user-selectors";
 import {logOut} from "../../Redux/auth-reducer";
+import {getIsAuth, getLogin} from "../../Redux/Selectors/auth-selectors";
 
 export type HeaderPropsType = {}
 

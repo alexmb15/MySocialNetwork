@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {logIn} from "../../Redux/auth-reducer";
 import {Navigate} from "react-router-dom";
 import {LoginFormValuesType, LoginReduxForm} from "./LoginForm";
-import {getCaptchaURL, getIsAuth} from "../../Redux/Selectors/user-selectors";
+import {getCaptchaURL, getIsAuth} from "../../Redux/Selectors/auth-selectors";
 
 type PropsType = {}
 

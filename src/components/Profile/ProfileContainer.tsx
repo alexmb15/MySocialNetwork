@@ -15,10 +15,10 @@ import {ProfileType} from "../../types/types";
 import {AppStateType} from "../../Redux/redux-store";
 import {
     getIsEditProfileModeSelector,
-    getUserIdSelector,
     getUserProfileSelector,
     getUserStatusSelector
-} from "../../Redux/Selectors/user-selectors";
+} from "../../Redux/Selectors/profile-selectors";
+import {getUserIdSelector} from "../../Redux/Selectors/auth-selectors";
 
 type MapStateToPropsType = ReturnType<typeof mapStateToProps>
 type MapDispatchToPropsType = {
