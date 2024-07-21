@@ -1,7 +1,7 @@
 import axios from "axios";
 
-axios.defaults.baseURL = 'https://social-network.samuraijs.com/api/1.0/';
-axios.defaults.headers.common["API-KEY"] = "690d6030-405b-47b2-9288-4542d8f1d46d";
+axios.defaults.baseURL = 'https://social-network.samuraijs.com/api/1.0/'
+axios.defaults.headers.common["API-KEY"] = process.env.API_KEY
 axios.defaults.withCredentials = true;
 
 export let instance = axios.create();

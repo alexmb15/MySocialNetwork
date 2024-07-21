@@ -12,17 +12,6 @@ import {
 import React from "react";
 
 const maxLength30 = maxLength(30);
-type LoginFormOwnProps = {
-    captchaURL: string | null;
-}
-export type LoginFormValuesType = {
-    email: string
-    password: string
-    rememberMe: boolean
-    captcha: string
-}
-type LoginFormValuesKeyType = keyof LoginFormValuesType
-type FormGeneralErrorValuesKeysType = Extract<keyof FormGeneralErrorValuesType, string>
 
 let LoginForm: React.FC<InjectedFormProps<LoginFormValuesType, LoginFormOwnProps>
     & LoginFormOwnProps> = ({
@@ -80,3 +69,15 @@ let LoginForm: React.FC<InjectedFormProps<LoginFormValuesType, LoginFormOwnProps
     );
 }
 export let LoginReduxForm = reduxForm<LoginFormValuesType, LoginFormOwnProps>({form: 'login'})(LoginForm);
+
+type LoginFormOwnProps = {
+    captchaURL: string | null;
+}
+export type LoginFormValuesType = {
+    email: string
+    password: string
+    rememberMe: boolean
+    captcha: string
+}
+type LoginFormValuesKeyType = keyof LoginFormValuesType
+type FormGeneralErrorValuesKeysType = Extract<keyof FormGeneralErrorValuesType, string>
