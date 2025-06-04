@@ -30,7 +30,7 @@ jobs:
 
       # 4) Copy the contents of build/ to server via SSH
       - name: Sync build to Contabo
-        uses: burnett01/rsync-deployments@v5
+        uses: burnett01/rsync-deployments@7.0.2
         with:
           switches: -avzr --delete
           path: build/                
