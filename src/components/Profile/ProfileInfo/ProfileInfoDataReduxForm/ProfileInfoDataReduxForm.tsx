@@ -33,7 +33,7 @@ export const ProfileInfoDataReduxForm: React.FC<InjectedFormProps<ProfileType, P
             </div>
             <div>
                 <label>About Me</label>
-                {createField<ProfileValuesKeysType>("About me", "aboutMe", [maxLength300], Textarea)}
+ф                {createField<ProfileValuesKeysType>("About me", "aboutMe", [requiredField, maxLength300], Textarea)}
             </div>
             <div className={styles.checkboxContainer}>
                 <label>Looking for a Job</label>
