@@ -22,13 +22,19 @@ jobs:
           node-version: 18   # or any LTS version
           cache: yarn
 
-      #3) npm ci and build
+      # 3. Create .env with secrets (will be included in yarn build process)
+      - name: Create .env for React build
+        run: |
+          echo "REACT_APP_BASEURL=${{ secrets.REACT_APP_BASEURL }}" >> .env
+          echo "REACT_APP_API_KEY=${{ secrets.REACT_APP_API_KEY }}" >> .env    
+
+      #4) npm ci and build
       - name: Install dependencies and build
         run: |
           yarn install --frozen-lockfile
           yarn build       
 
-      # 4) Copy the contents of build/ to server via SSH
+      # 5) Copy the contents of build/ to server via SSH
       - name: Sync build to Contabo
         uses: burnett01/rsync-deployments@7.0.2
         with:
@@ -39,7 +45,7 @@ jobs:
           remote_user: ${{ secrets.SERVER_USER }}
           remote_key: ${{ secrets.SERVER_SSH_KEY }}
 
-      # 5) (optional) - restart nginx if you made any changes to the config.
+      # 6) (optional) - restart nginx if you made any changes to the config.
       # - name: Reload Nginx
       #   uses: appleboy/ssh-action@v1.0.3
       #   with:
