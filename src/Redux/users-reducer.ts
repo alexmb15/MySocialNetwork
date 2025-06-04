@@ -5,7 +5,7 @@ import {AppStateType, InferActionsTypes} from "./redux-store";
 import {Dispatch} from "redux";
 import {userAPI} from "../api/userAPI";
 import {followAPI} from "../api/followAPI";
-import {sidebarActions} from "./sidebar-reducer";
+//import {sidebarActions} from "./sidebar-reducer";
 
 let initialState = {
     users: [] as Array<UserType>,
@@ -67,7 +67,7 @@ const usersReducer = (state = initialState, action: ActionTypes): InitialStateTy
                 ...state,
                 followInProgress: action.isFetching
                     ? [...state.followInProgress, action.userId]
-                    : state.followInProgress.filter(id => id != action.userId)
+                    : state.followInProgress.filter(id => id !== action.userId)
             }
         case "TOGGLE_IS_FETCHING":
             return {
