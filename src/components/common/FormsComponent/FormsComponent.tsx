@@ -60,7 +60,7 @@ export const createLabel = (name: string) => {
 
 export const createImg = (img: string) => {
     return <div>
-        <img alt={"image"} src={img}/>
+        <img src={img} alt=""/>
     </div>
 }
 

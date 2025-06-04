@@ -3,7 +3,7 @@ import preloader from '../../../assets/images/preloader.svg'
 
 let Preloader: React.FC = (props) => {
     return <div>
-        <img src={preloader}/>
+        <img src={preloader} alt="" />
     </div>
 }
 

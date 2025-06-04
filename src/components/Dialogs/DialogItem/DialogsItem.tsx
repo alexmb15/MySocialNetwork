@@ -13,7 +13,10 @@ const DialogItem: React.FC<DialogItemPropsType> = ({id, name, imgUrl}) => {
     let path = "/Dialogs/" + id;
     return (
         <div className={classes.dialogsItem}>
-            <img src={imgUrl != null ? imgUrl : defaultProfilePhoto}/>
+            <img
+                src={imgUrl != null ? imgUrl : defaultProfilePhoto}
+                alt=""
+            />
             <NavLink to={path}
                      className={navData => navData.isActive ? classes.active : classes.dialogsItem}>
                 {name}

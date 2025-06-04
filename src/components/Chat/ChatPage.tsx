@@ -72,7 +72,7 @@ const Message: React.FC<{ message: MessageType }> = React.memo(({message}) => {
     )
 })
 
-const AddNewMessageForm: React.FC<{}> = ({}) => {
+const AddNewMessageForm: React.FC<{}> = () => {
     const dispatch = useDispatch();
     const status = useSelector(getStatusSelector);
 

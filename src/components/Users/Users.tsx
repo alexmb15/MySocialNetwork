@@ -50,8 +50,8 @@ let Users: React.FC<UsersPropsType> = (props) => {
                 break
         }
 
-
         dispatch(getUsers(actualPage, pageSize, actualFiler))
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     useEffect(() => {
@@ -60,6 +60,7 @@ let Users: React.FC<UsersPropsType> = (props) => {
         if (filter.friend !== null) queryParams.friend = String(filter.friend)
 
         setSearchParams(queryParams)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [filter, currentPage])
 
     const follow = (userId: number) => {
